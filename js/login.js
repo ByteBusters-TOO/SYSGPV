@@ -6,7 +6,7 @@ $(document).ready(function(){
         var password = $('#password').val();
 
         $.ajax({
-            url: '../controllers/indexController.php',
+            url: './controllers/indexController.php',
             type: 'POST',
             data: { username: username, password: password},
             success: function(response){
