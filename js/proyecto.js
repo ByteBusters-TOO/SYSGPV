@@ -1,19 +1,22 @@
-$(document).ready(function() {
+$(document).ready(function() { 
     var editProyectoId = null;
 
     // Mostrar mensajes en el alert
     function showMessage(type, message) {
         $('.mensaje').html(
-            '<div class="alert alert-' + type + ' alert-dismissible text-white fade show" role="alert">' +
+            '<div class="alert alert-' + type + ' alert-dismissible text-black fade show" role="alert">' +
             '<span class="text-sm">' + message + '</span>' +
-            '<button type="button" class="btn-close text-lg py-3 opacity-10" data-dismiss="alert" aria-label="Close">' +
+            '<button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">' +
             '<span aria-hidden="true">&times;</span></button></div>'
         );
+        setTimeout(function() {
+            $('.mensaje').html(''); // Limpiar el mensaje después de 3 segundos
+        }, 3000);
     }
 
     // Crear o modificar proyectos
     $('#actionProyectoButton').click(function() {
-        console.log("Botón Guardar Proyecto presionado");  // Depuración: Verificar si se presiona el botón
+        console.log("Botón Guardar Proyecto presionado");
         var formData = new FormData();
         formData.append('nombre_proyecto', $('#nombre_proyecto').val());
         formData.append('descripcion_proyecto', $('#descripcion_proyecto').val());
@@ -28,25 +31,25 @@ $(document).ready(function() {
         }
 
         if (editProyectoId !== null) {
-            formData.append('_method', 'PUT'); // Campo oculto para simular PUT
+            formData.append('_method', 'PUT');
             formData.append('id_proyecto', editProyectoId);
         }
 
         $.ajax({
             url: '../controllers/ProyectoController.php',
-            type: 'POST', // Usamos POST para ambas operaciones
+            type: 'POST',
             data: formData,
             contentType: false,
             processData: false,
             success: function(response) {
-                console.log(response); // Depuración: Verificar la respuesta del servidor
+                console.log("Respuesta del servidor:", response);
                 if (response.status === 'success') {
                     showMessage('success', response.message);
-                    $('#crearProyectoForm')[0].reset(); // Limpiar el formulario
+                    $('#crearProyectoForm')[0].reset();
                     $('#actionProyectoButton').text('Guardar Proyecto');
                     editProyectoId = null;
                 } else {
-                    showMessage('danger', response.message);
+                    showMessage('danger', response.message || "Ha ocurrido un error desconocido");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
