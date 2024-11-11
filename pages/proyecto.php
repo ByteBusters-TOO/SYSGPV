@@ -12,6 +12,10 @@
 
     <div class="container mt-5">
         <h2>Crear Nuevo Proyecto</h2>
+        
+        <!-- Contenedor de mensaje -->
+        <div class="mensaje mb-3"></div>
+
         <form id="crearProyectoForm">
             <div class="mb-3">
                 <label for="nombre_proyecto" class="form-label">Nombre del Proyecto</label>
@@ -22,7 +26,7 @@
                 <textarea class="form-control" id="descripcion_proyecto" name="descripcion_proyecto" rows="4" required></textarea>
             </div>
             <div class="mb-3">
-                <label for="ubicacion_proyecto" class="form-label">Ubicacion</label>
+                <label for="ubicacion_proyecto" class="form-label">Ubicación</label>
                 <textarea class="form-control" id="ubicacion_proyecto" name="ubicacion_proyecto" rows="4" required></textarea>
             </div>
             <div class="mb-3">

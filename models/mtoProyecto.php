@@ -25,6 +25,14 @@ class Proyecto {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    // Nueva función para verificar si un proyecto con el mismo nombre ya existe
+    public function existsByName($nombre_proyecto) {
+        $query = "SELECT COUNT(*) FROM " . $this->table_name . " WHERE nombre_proyecto = :nombre_proyecto";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nombre_proyecto', $nombre_proyecto);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;  // Devuelve true si ya existe, false si no
+    }
 
     public function create($nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin) {
         try {
@@ -36,13 +44,9 @@ class Proyecto {
             $stmt->bindParam(':fecha_inicio', $fecha_inicio);
             $stmt->bindParam(':fecha_fin', $fecha_fin);
             
-            if ($stmt->execute()) {
-                echo "Inserción exitosa";  // Depuración: Confirmación de inserción
-            } else {
-                echo "Error en la inserción";  // Depuración: Error en la inserción
-            }
+            return $stmt->execute();  // Retorna true si se inserta con éxito, false en caso contrario
         } catch (PDOException $e) {
-            echo "Error en la creación del proyecto: " . $e->getMessage();
+            return false;  // Devuelve false en caso de error
         }
     }
 
@@ -54,7 +58,8 @@ class Proyecto {
         $stmt->bindParam(':ubicacion_proyecto', $ubicacion_proyecto);
         $stmt->bindParam(':fecha_inicio', $fecha_inicio);
         $stmt->bindParam(':fecha_fin', $fecha_fin);
-        
+        $stmt->bindParam(':id_proyecto', $id_proyecto);
+        return $stmt->execute();  // Ejecutar la actualización
     }
 
     public function delete($id_proyecto) {
