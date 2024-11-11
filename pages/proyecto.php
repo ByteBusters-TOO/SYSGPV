@@ -6,6 +6,18 @@
     <title>Crear Nuevo Proyecto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilo adicional para la marca de copyright */
+        .copyright {
+    position: fixed;
+    bottom: 0;
+    
+    width: 100%;
+    text-align: right;
+    padding: 10px 10px;
+    color: #6c757d; /* Color del texto */
+}
+    </style>
 </head>
 <body>
     <?php include '../partials/navbar.html'; ?>
@@ -44,5 +56,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/proyecto.js"></script> <!-- Referencia al archivo JS externo -->
+     <!-- Div de copyright -->
+     <div class="copyright">
+        © 2024 | BYTE BUSTERS
+    </div>
 </body>
 </html>
