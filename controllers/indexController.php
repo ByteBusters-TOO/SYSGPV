@@ -31,7 +31,7 @@ try {
                 $response = ['status' => 'success', 'redirect' => './pages/home.php'];
             }
         } else {//Si el correo o la contraseña son incorrectos mostramos un mensaje de error
-            throw new Exception('Usuario o contraseña incorrectos ' .$user. " ERROR");
+            throw new Exception('Usuario o contraseña incorrectos.' .$user. " ERROR");
         }
     } else {//Si hay algun error en el servidore mostramos algun error
         throw new Exception('Método no permitido.');
