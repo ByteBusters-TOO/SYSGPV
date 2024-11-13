@@ -52,7 +52,7 @@
     <th>Ubicación</th>
     <th>Inicio</th>
     <th>Fin</th>
-    <th>Fin</th>
+    <th>Acciones</th>
 
     </tr>";
 
