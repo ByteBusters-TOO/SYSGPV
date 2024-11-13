@@ -60,10 +60,17 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/usuario.js"></script> <!-- Referencia al archivo JS externo -->
-     <!-- Div de copyright -->
-     <div class="copyright">
-        © 2024 | BYTE BUSTERS
-    </div>
+    <footer class="footer py-4  ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-start">
+                © 2024 | BYTE BUSTERS
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
 
 <!-- Modal de Confirmación de Registro -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmRegisterModalLabel" aria-hidden="true">
