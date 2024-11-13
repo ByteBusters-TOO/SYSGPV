@@ -40,7 +40,10 @@
                      <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
                   </div><br>
                   <button type="button" class="btn btn-black" id="loginButton">Iniciar Sesion</button>
-                  <button type="button" class="btn btn-secondary">Registrar</button>
+                  <p class="mt-4 text-sm text-center">
+                    ¿No tienes una cuenta?
+                    <a href="pages/usuario.php" class="text-primary text-gradient font-weight-bold">Crear cuenta</a>
+                  </p>
                </form>
             </div>
          </div>
