@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,26 +24,69 @@
     <div class="container mt-5">
         <h2>Proyectos</h2>
         
-        <!-- Contenedor de mensaje -->
-        <div class="mensaje mb-3"></div>
+        <?php
+    // Conexión a la base de datos y consulta (igual que en el ejemplo anterior)
+    
+    // Conexión a la base de datos (ajusta los datos según tu configuración)
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "sysgpv_db";
 
-        <!-- Tabla de proyectos -->
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nombre del Proyecto</th>
-                    <th>Descripción</th>
-                    <th>Ubicación</th>
-                    <th>Fecha de Inicio</th>
-                    <th>Fecha de Finalización</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="proyectosList">
-                <!-- Los datos de los proyectos serán insertados aquí mediante JavaScript -->
-            </tbody>
-        </table>
-    </div>
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Consulta SQL para obtener los datos
+    $sql = "SELECT * FROM proyecto";
+    $result = $conn->query($sql);
+
+    // Crear la tabla HTML
+    echo "<table class='table table-striped'>";
+    echo "<tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Ubicación</th>
+    <th>Inicio</th>
+    <th>Fin</th>
+    <th>Acciones</th>
+
+    </tr>";
+
+    // Recorrer los resultados y crear las filas
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["nombre_proyecto"] . "</td>";
+            echo "<td>" . $row["descripcion_proyecto"] . "</td>";
+            echo "<td>" . $row["ubicacion_proyecto"] . "</td>";
+            echo "<td>" . $row["fecha_inicio"] . "</td>";
+            echo "<td>" . $row["fecha_fin"] . "</td>";
+            echo " <td>
+            <!-- Redirige a la página de edición pasando el ID del proyecto -->
+            <a href='proyectoEdit.php?id=$[id_proyecto]' class='btn btn-primary btn-sm'>Editar</a>
+
+            
+        </td>";
+
+            // ... y así sucesivamente para las demás columnas
+            echo "</tr>";
+        }
+    } else {
+        echo "0 results";
+    }
+
+    echo "</table>";
+
+    $conn->close();
+
+
+
+    echo "</table>";
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -60,39 +104,6 @@
         </div>
       </footer>
 
-    <script>
-        // Ejemplo de cómo se podrían cargar los proyectos con JavaScript
-        $(document).ready(function() {
-            // Simulación de datos de proyectos
-            const proyectos = [
-                { id: 1, nombre: "Proyecto 1", descripcion: "Descripción del proyecto 1", ubicacion: "Ubicación 1", fechaInicio: "2024-01-01", fechaFin: "2024-12-31" },
-                { id: 2, nombre: "Proyecto 2", descripcion: "Descripción del proyecto 2", ubicacion: "Ubicación 2", fechaInicio: "2024-02-15", fechaFin: "2024-11-30" }
-            ];
 
-            // Llenamos la tabla con los datos de los proyectos
-            const proyectosList = $('#proyectosList');
-            proyectos.forEach(proyecto => {
-                proyectosList.append(`
-                    <tr>
-                        <td>${proyecto.nombre}</td>
-                        <td>${proyecto.descripcion}</td>
-                        <td>${proyecto.ubicacion}</td>
-                        <td>${proyecto.fechaInicio}</td>
-                        <td>${proyecto.fechaFin}</td>
-                        <td>
-                            <!-- Redirige a la página de edición pasando el ID del proyecto -->
-                            <a href="proyectoEdit.php?id=${proyecto.id}" class="btn btn-primary btn-sm">Editar</a>
-
-                            <!-- Formulario para eliminar el proyecto -->
-                            <form action="eliminar-proyecto.php" method="POST" style="display:inline;">
-                                <input type="hidden" name="id" value="${proyecto.id}">
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?')">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                `);
-            });
-        });
-    </script>
 </body>
 </html>
