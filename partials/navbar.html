@@ -23,17 +23,27 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reportes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ventas</a>
+                    <!-- Menú para Ventas y Construcciones -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ventasConstruccionesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ventas y Construcciones
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ventasConstruccionesDropdown">
+                            <li><a class="dropdown-item" href="ventaEdit.php?action=ver">Ver y Editar Ventas</a></li>
+                            <li><a class="dropdown-item" href="ventaRegis.php?action=crear">Registrar Venta</a></li>
+                            <li><a class="dropdown-item" href="construccionEdit.php?action=ver">Ver y Editar Construcciones</a></li>
+                            <li><a class="dropdown-item" href="construccionRegis.php?action=crear">Registrar Construcción</a></li>
+                        </ul>
                     </li>
+                    <!-- Menú para Proyectos -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="proyectosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Proyectos
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="proyectosDropdown">
-                            <li><a class="dropdown-item" href="proyectoVer.php?action=ver">Ver </a></li>
-                            <li><a class="dropdown-item" href="proyecto.php?action=crear">Crear </a></li>
-                            <li><a class="dropdown-item" href="proyectoEdit.php?action=editar">Editar </a></li>
+                            <li><a class="dropdown-item" href="proyectoVer.php?action=ver">Ver</a></li>
+                            <li><a class="dropdown-item" href="proyecto.php?action=crear">Crear</a></li>
+                            <li><a class="dropdown-item" href="proyectoEdit.php?action=editar">Editar</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
