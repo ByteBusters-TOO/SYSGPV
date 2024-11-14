@@ -1,3 +1,14 @@
+<?php
+require_once '../models/mtoCasa.php';
+
+// Crear instancia del modelo
+$casa = new Casa();
+
+// Obtener las casas disponibles para la venta
+$casasDisponibles = $casa->getCasasDisponibles();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,30 +52,19 @@
             </thead>
             <tbody>
                 <!-- Aquí se listarán las casas registradas -->
-                <tr>
-                    <td>1</td>
-                    <td>Casa 101</td>
-                    <td>Lista para la Venta</td>
-                    <td>$100,000</td>
-                    <td>Proyecto A</td>
-                    <td>
-                        <!-- Botones para registrar la venta y editar -->
-                        <button class="btn btn-success btn-sm" onclick="registrarVenta(1)">Registrar Venta</button>
-                        <button class="btn btn-warning btn-sm" onclick="editarCasa(1)">Editar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Casa 102</td>
-                    <td>Lista para la Venta</td>
-                    <td>$120,000</td>
-                    <td>Proyecto B</td>
-                    <td>
-                        <button class="btn btn-success btn-sm" onclick="registrarVenta(2)">Registrar Venta</button>
-                        <button class="btn btn-warning btn-sm" onclick="editarCasa(2)">Editar</button>
-                    </td>
-                </tr>
-                <!-- Más filas de casas se agregarán aquí -->
+                <?php foreach ($casasDisponibles as $casa): ?>
+                    <tr>
+                        <td><?php echo $casa['id_casa']; ?></td>
+                        <td><?php echo $casa['numero_casa']; ?></td>
+                        <td><?php echo $casa['estado_casa']; ?></td>
+                        <td>$<?php echo number_format($casa['precio_casa'], 2); ?></td>
+                        <td><?php echo $casa['id_proyecto']; ?></td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="registrarVenta(<?php echo $casa['id_casa']; ?>)">Registrar Venta</button>
+                            <button class="btn btn-warning btn-sm" onclick="editarCasa(<?php echo $casa['id_casa']; ?>)">Editar</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

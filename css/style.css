@@ -1,11 +1,10 @@
 .navbar {
-    margin-top: 20px;
-    height: 60px; /* Altura fija de la barra */
+    height: 70px; /* Ajusta la altura de acuerdo al contenido */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0;
 }
 
-/* Ajustamos el logo dentro de la barra */
 .navbar-brand img {
-    height: 200px; /* Ajusta el tamaño del logo */
-    max-height: 100%; /* Asegura que no supere la altura de la barra */
+    height: 110px; /* Ajusta el tamaño del logo para que encaje en la navbar */
     width: auto; /* Mantiene la proporción */
 }

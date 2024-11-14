@@ -12,7 +12,7 @@ try {
 
     switch ($method) {// Verifica el método HTTP de la solicitud y actúa en consecuencia
         case 'GET':
-            if (isset($_GET['tipo_usuario'])) {// Si la solicitud es GET y se pasa un parámetro 'tipo_usuario', cargara todos los roles del sistema
+            if (isset($_GET['rol_usuario'])) {// Si la solicitud es GET y se pasa un parámetro 'tipo_usuario', cargara todos los roles del sistema
                 $response = $usuarioModel->getRolesUsuario();
             } else if (isset($_GET['id'])) {// Si la solicitud es GET y se pasa un parámetro 'id', lee un usuario específico
                 $response = $usuarioModel->read($_GET['id']);
