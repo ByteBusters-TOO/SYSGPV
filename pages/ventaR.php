@@ -37,21 +37,25 @@
                 <input type="number" class="form-control" id="monto_venta" name="monto_venta" required>
             </div>
             <div class="mb-3">
-                <label for="id_cliente" class="form-label">Cliente</label>
-                <select class="form-control" id="id_cliente" name="id_cliente" required>
-                    <!-- Aquí se agregarán los clientes registrados -->
-                    <option value="">Seleccionar Cliente</option>
-                    <!-- Ejemplo de cliente: -->
-                    <option value="1">Cliente 1</option>
-                    <option value="2">Cliente 2</option>
-                </select>
+                <label for="nombre_cliente" class="form-label">Nombre del Cliente</label>
+                <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellido_cliente" class="form-label">Apellido del Cliente</label>
+                <input type="text" class="form-control" id="apellido_cliente" name="apellido_cliente" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo_cliente" class="form-label">Correo del Cliente</label>
+                <input type="email" class="form-control" id="correo_cliente" name="correo_cliente" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono_cliente" class="form-label">Teléfono del Cliente</label>
+                <input type="tel" class="form-control" id="telefono_cliente" name="telefono_cliente" required>
             </div>
             <div class="mb-3">
                 <label for="id_casa" class="form-label">Casa a Vender</label>
                 <select class="form-control" id="id_casa" name="id_casa" required>
-                    <!-- Aquí se agregarán las casas disponibles para la venta -->
                     <option value="">Seleccionar Casa</option>
-                    <!-- Ejemplo de casa disponible: -->
                     <option value="1">Casa 101 - $100,000</option>
                     <option value="2">Casa 102 - $120,000</option>
                 </select>
@@ -62,7 +66,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/venta.js"></script> <!-- Referencia al archivo JS externo -->
     
     <footer class="footer py-4">
         <div class="container-fluid">
