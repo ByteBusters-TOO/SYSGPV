@@ -45,4 +45,14 @@ class Casa {
             return ['status' => false, 'mensaje' => 'Error: ' . $e->getMessage()];
         }
     }
+    public function getCasasDisponibles() {
+        $query = "SELECT c.id_casa, c.numero_casa, c.estado_casa, c.precio_casa, c.id_proyecto, p.nombre_proyecto AS proyecto
+                  FROM " . $this->table_name . " c
+                  JOIN proyecto p ON c.id_proyecto = p.id_proyecto
+                  WHERE c.estado_casa = 'Lista para la Venta'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Devuelve todas las casas que están listas para la venta
+    }
+    
 }
