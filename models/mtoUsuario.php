@@ -47,7 +47,7 @@ class Usuario {
     public function update($id, $nombre_usuario, $correo_usuario, $password, $id_rol) {
         $query = "UPDATE " . $this->table_name . " SET nombre_usuario = :nombre_usuario, correo_usuario = :correo_usuario, password = :password, id_rol = :id_rol WHERE id_usuario = :id_usuario";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id_usuario', $id);
         $stmt->bindParam(':nombre_usuario', $nombre_usuario);
         $stmt->bindParam(':correo_usuario', $correo_usuario);
         $stmt->bindParam(':password', $password);

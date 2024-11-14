@@ -20,13 +20,13 @@
     </style>
 </head>
 <body>
-    <?php include '../partials/navbar.html'; ?>
+    <?php include '../partials/navbar-register.html'; ?>
 
     <div class="container mt-5">
-        <h2>Registrar Nuevo Usuario</h2>
+        <h2>Registrar Usuario</h2>
         
         <!-- Contenedor de mensaje -->
-        <div class="mensaje mb-3"></div>
+        <div class="mensaje my-4 margen-form"></div>
 
         <form role="form" class="margen-form" id="RegistrarUsuarioForm">
 
@@ -40,7 +40,7 @@
                 </div>
                 <div class="mb-2">
                   <label class="form-label" for="u_rol_usuario">Rol Usuario: </label>
-                  <select name="tipo_usuario" id="u_rol_usuario" class="form-control border" name="Seleccionar...">
+                  <select name="tipo_usuario" id="u_rol_usuario" class="form-control border">
                   </select>
                 </div>
                 <div class="mb-2">
@@ -51,8 +51,9 @@
                   <label class="form-label" for="confcontrasenia">Confirmar Contraseña:</label>
                   <input type="password" class="form-control border" id="confcontrasenia" required>
                 </div>
-                <div class="input-group input-group-outline mb-2">
-                  <button type="button" id="actionUsuarioButton" class="btn btn-primary">Guardar</button>
+                <div class="ms-auto">
+                    <button type="button" href="#" id="actionUsuarioButton" class="btn btn-outline-success">Guardar</button>
+                    <a href="../index.php" class="btn btn-outline-secondary">Cancelar</a>
                 </div>
         </form>
     </div>

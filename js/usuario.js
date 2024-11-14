@@ -10,7 +10,7 @@ $(document).ready(function(){
     // Función para cargar tipos de roles en el select
     function loadTiposRoles() {
         $.ajax({
-            url: '../controllers/usuarioController.php?tipo_usuario=true',
+            url: '../controllers/usuarioController.php?rol_usuario=true',
             type: 'GET',
             success: function(response) {
                 var select = $('#u_rol_usuario');
@@ -27,15 +27,46 @@ $(document).ready(function(){
 
     // Mostrar mensajes en el alert
     function showMessage(type, message) {
-        $('.mensaje').html(
-            '<div class="alert alert-' + type + ' alert-dismissible text-white fade show" role="alert"><span class="text-sm">'
-            + message +'<button type="button" class="btn-close text-lg py-3 opacity-10" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
-        );
+        // Define los estilos específicos para cada tipo de alerta
+        const alertStyles = {
+            'success': 'background-color: #58d68d; border-color: #146c43;', // Verde 
+            'danger': 'background-color: #ec7063; border-color: #b02a37;',  // Rojo 
+            'warning': 'background-color: #f4d03f; border-color: #cc9a06; color: #000;', // Amarillo 
+            'info': 'background-color: #5499c7; border-color: #0aa2c0;',    // Azul
+        };
+
+       // Crear el HTML de la alerta con los estilos personalizados
+    $('.mensaje').html(`
+        <div class="alert alert-${type} alert-dismissible fade show" 
+             role="alert" 
+             style="${alertStyles[type]} box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+                    padding: 1rem; 
+                    margin: 1rem 0;">
+            <div class="d-flex align-items-center">
+                <span class="text-sm" style="font-weight: 500;">
+                    ${message}
+                </span>
+                <button type="button" 
+                        class="btn-close" 
+                        data-bs-dismiss="alert" 
+                        aria-label="Close"
+                        style="margin-left: auto; 
+                               opacity: 0.8;
+                               filter: brightness(${type === 'warning' ? '0' : '100'});">
+                </button>
+            </div>
+        </div>
+    `);
+
+        // Autocierre después de 5 segundos
+        setTimeout(() => {
+            $('.alert').fadeOut('slow');
+        }, 5000);
     }
 
     // Registrar usuario
     $('#actionUsuarioButton').click(function() {
-        var id_rol = $('#u_tipo_usuario').val();
+        var id_rol = $('#u_rol_usuario').val();
         var nombre_usuario = $('#nombre_usuario').val();
         var correo_usuario = $('#correo_usuario').val();
         var password = $('#upassword').val();
@@ -43,10 +74,10 @@ $(document).ready(function(){
 
         if (!pattern.test(password)) {
             // Contraseña inválida
-            showMessage('warning', "Error, la contraseña no cumple con alguno de los requisitos /n Almenos una mayúscula, una minúscula, un numero, un carácter especial, que no tenga espacios");
+            showMessage('danger', "Error, la contraseña no cumple con alguno de los requisitos. Almenos una mayúscula, una minúscula, un numero, un carácter especial, que no tenga espacios.");
         } else {
             if (password != confcontrasenia) {
-                showMessage('danger', 'Las contraseñas no coinciden.');
+                showMessage('warning', 'Las contraseñas no coinciden.');
                 return;
             }
 
@@ -57,7 +88,7 @@ $(document).ready(function(){
 
             var url = '../controllers/usuarioController.php';
             var method = 'POST';
-            var data = { id_rol: id_rol, nombre_usuario: nombre_usuario, correo_usuario: correo_usuario, password: password } ;
+            var data = { nombre_usuario: nombre_usuario, correo_usuario: correo_usuario, id_rol: id_rol, password: password } ;
 
             if (editUsuarioId !== null) {
                 method = 'PUT';
