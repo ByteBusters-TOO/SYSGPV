@@ -10,13 +10,13 @@ class mtoindex {
         $this->conn = $database->getConnection();
     }
 
-    public function authenticate($nombre_usuario, $contra) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE nombre_usuario = :nombre_usuario AND contra = :contra";
+    public function authenticate($nombre_usuario, $password) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE nombre_usuario = :nombre_usuario AND password = :password";
         $stmt = $this->conn->prepare($query);
         
         // Bind parameters
         $stmt->bindParam(':nombre_usuario', $nombre_usuario);
-        $stmt->bindParam(':contra', $contra);        
+        $stmt->bindParam(':password', $password);        
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
