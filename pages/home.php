@@ -7,6 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="..\css\style.css">
     <style>
+       /* Estilo para el fondo centrado */
+       body {
+            background-image: url('../src/image/LogoHome.png'); /* Ruta de la imagen desde la raíz del servidor */
+            background-size: contain;  /* Ajusta la imagen para que esté contenida */
+            background-repeat: no-repeat; /* Evita que se repita la imagen */
+            background-position: center; /* Centra la imagen */
+            min-height: 100vh; /* Asegura que cubra toda la pantalla */
+        }
         /* Estilo adicional para la marca de copyright */
         .copyright {
     position: fixed;
@@ -35,5 +43,6 @@
           </div>
         </div>
       </footer>
+      
 </body>
 </html>
