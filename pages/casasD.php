@@ -11,6 +11,7 @@ $casasDisponibles = $casa->getCasasDisponibles();
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,16 +26,18 @@ $casasDisponibles = $casa->getCasasDisponibles();
             width: 100%;
             text-align: right;
             padding: 10px 10px;
-            color: #6c757d; /* Color del texto */
+            color: #6c757d;
+            /* Color del texto */
         }
     </style>
 </head>
+
 <body>
     <?php include '../partials/navbar.html'; ?>
 
     <div class="container mt-5">
         <h2>Casas Listas para la Venta</h2>
-        
+
         <!-- Contenedor de mensaje -->
         <div class="mensaje mb-3"></div>
 
@@ -60,7 +63,7 @@ $casasDisponibles = $casa->getCasasDisponibles();
                         <td>$<?php echo number_format($casa['precio_casa'], 2); ?></td>
                         <td><?php echo $casa['id_proyecto']; ?></td>
                         <td>
-                            <button class="btn btn-success btn-sm" onclick="registrarVenta(<?php echo $casa['id_casa']; ?>)">Registrar Venta</button>
+                            <button class="btn btn-success btn-sm" onclick="registrarVenta(<?php echo $casa['id_casa']; ?>, <?php echo $casa['precio_casa']; ?>)">Registrar Venta</button>
                             <button class="btn btn-warning btn-sm" onclick="editarCasa(<?php echo $casa['id_casa']; ?>)">Editar</button>
                         </td>
                     </tr>
@@ -72,7 +75,7 @@ $casasDisponibles = $casa->getCasasDisponibles();
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/casa.js"></script> <!-- Referencia al archivo JS externo -->
-    
+
     <footer class="footer py-4">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
@@ -86,10 +89,10 @@ $casasDisponibles = $casa->getCasasDisponibles();
     </footer>
 
     <script>
-        // Función para registrar que la casa se venderá
-        function registrarVenta(casaId) {
-            // Redirigir al archivo de venta
-            window.location.href = "ventaR.php?id=" + casaId; // Redirige a ventaR.php con el ID de la casa
+         // Función para registrar la venta de una casa, redirigiendo a ventaR.php con el ID y el precio de la casa
+         function registrarVenta(casaId, precioCasa) {
+            // Redirigir a ventaR.php con el ID y precio de la casa como parámetros en la URL
+            window.location.href = "ventaR.php?id=" + casaId + "&precio=" + precioCasa;
         }
 
         // Función para editar los detalles de la casa
@@ -99,4 +102,5 @@ $casasDisponibles = $casa->getCasasDisponibles();
         }
     </script>
 </body>
+
 </html>

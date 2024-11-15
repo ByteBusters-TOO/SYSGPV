@@ -55,4 +55,5 @@ class Casa {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Devuelve todas las casas que están listas para la venta
     }
     
+    
 }
