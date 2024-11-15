@@ -1,3 +1,14 @@
+<?php
+// Incluir el modelo de ventas
+require_once '../models/mtoVenta.php';
+
+// Crear instancia del modelo de ventas
+$venta = new Venta();
+
+// Obtener el historial de ventas
+$ventas = $venta->getHistorialVentas();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +25,7 @@
             width: 100%;
             text-align: right;
             padding: 10px 10px;
-            color: #6c757d; /* Color del texto */
+            color: #6c757d;
         }
     </style>
 </head>
@@ -23,7 +34,7 @@
 
     <div class="container mt-5">
         <h2>Historial de Ventas</h2>
-        
+
         <!-- Contenedor de mensaje -->
         <div class="mensaje mb-3"></div>
 
@@ -41,36 +52,26 @@
             </thead>
             <tbody>
                 <!-- Aquí se listarán las ventas registradas -->
-                <tr>
-                    <td>1</td>
-                    <td>2024-11-01</td>
-                    <td>$100,000</td>
-                    <td>Cliente 1</td>
-                    <td>Casa 101</td>
-                    <td>
-                        <!-- Botón para ver detalles de la venta (puedes agregar lógica de ver detalles) -->
-                        <button class="btn btn-info btn-sm" onclick="verDetallesVenta(1)">Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2024-11-05</td>
-                    <td>$120,000</td>
-                    <td>Cliente 2</td>
-                    <td>Casa 102</td>
-                    <td>
-                        <button class="btn btn-info btn-sm" onclick="verDetallesVenta(2)">Ver Detalles</button>
-                    </td>
-                </tr>
-                <!-- Más filas de ventas se agregarán aquí -->
+                <?php foreach ($ventas as $venta): ?>
+                    <tr>
+                        <td><?php echo $venta['id_venta']; ?></td>
+                        <td><?php echo $venta['fecha_venta']; ?></td>
+                        <td>$<?php echo number_format($venta['monto_venta'], 2); ?></td>
+                        <td><?php echo $venta['nombre_cliente']; ?></td>
+                        <td><?php echo $venta['numero_casa']; ?></td>
+                        <td>
+                            <a href="ventaDetalle.php?id=<?php echo $venta['id_venta']; ?>" class="btn btn-info btn-sm">Ver Detalles</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/venta.js"></script> <!-- Referencia al archivo JS externo -->
     
+
     <footer class="footer py-4">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
@@ -82,15 +83,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Función para ver detalles de la venta
-        function verDetallesVenta(ventaId) {
-            // Lógica para ver detalles de la venta, como mostrar un modal o redirigir a otra página
-            alert('Ver detalles de la venta con ID ' + ventaId);
-            // Puedes redirigir a otra página que contenga detalles específicos de la venta
-            // window.location.href = 'detallesVenta.php?id=' + ventaId;
-        }
-    </script>
 </body>
 </html>
