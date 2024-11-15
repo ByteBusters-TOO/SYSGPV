@@ -35,6 +35,8 @@ if (isset($_GET['id'])) {
 
     <div class="container mt-5">
         <h2>Editar Casa</h2>
+         <!-- Contenedor para mensajes -->
+         <div class="mensaje mb-3"></div>
 
         <!-- Formulario para editar los detalles de la casa -->
         <form id="editarCasaForm">
