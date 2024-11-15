@@ -54,6 +54,23 @@ class Casa {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Devuelve todas las casas que están listas para la venta
     }
+     // Método para actualizar el estado de la casa a "Vendida"
+     public function actualizarEstadoVendido($id_casa) {
+        try {
+            // Actualizar el estado de la casa a "Vendida"
+            $query = "UPDATE " . $this->table_name . " SET estado_casa = 'Vendida' WHERE id_casa = :id_casa";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':id_casa', $id_casa);
+
+            if ($stmt->execute()) {
+                return ['status' => true, 'mensaje' => 'Estado de la casa actualizado a "Vendida".'];
+            } else {
+                return ['status' => false, 'mensaje' => 'Error al actualizar el estado de la casa.'];
+            }
+        } catch (PDOException $e) {
+            return ['status' => false, 'mensaje' => 'Error: ' . $e->getMessage()];
+        }
+    }
     
     
 }

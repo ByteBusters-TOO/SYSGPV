@@ -42,6 +42,27 @@ $(document).ready(function() {
                     const data = JSON.parse(response);
                     showMessage(data.status, data.mensaje); // Mostrar mensaje de éxito o error
                     if (data.status === 'success') {
+                         // Llamar al controlador para actualizar el estado de la casa a "Vendida"
+                         $.ajax({
+                            url: '../controllers/CasaController.php',  // Asegúrate de que la URL sea correcta
+                            type: 'POST',
+                            data: {
+                                action: 'updateStatus',
+                                id_casa: idCasa,
+                                nuevo_estado: 'Vendida'
+                            },
+                            success: function(response) {
+                                const casaData = JSON.parse(response);
+                                if (casaData.status === 'success') {
+                                    showMessage('success', 'Casa marcada como vendida.');
+                                } else {
+                                    showMessage('danger', 'Error al actualizar el estado de la casa.');
+                                }
+                            },
+                            error: function() {
+                                showMessage('danger', 'Error al intentar actualizar el estado de la casa.');
+                            }
+                        });
                         $('#registrarVentaForm')[0].reset();  // Limpia el formulario si es exitoso
                     }
                 },

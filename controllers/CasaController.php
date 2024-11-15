@@ -15,5 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $casaModel->create($numero_casa, $estado_casa, $precio_casa, $id_proyecto);
         echo json_encode(['mensaje' => $result['mensaje']]);
     }
+    // Actualizar estado de la casa (para cambiar a "Vendida")
+    if ($action === 'updateStatus' && $id_casa && $nuevo_estado) {
+        $result = $casaModel->actualizarEstadoVendido($id_casa, $nuevo_estado);
+        echo json_encode(['status' => $result['status'], 'mensaje' => $result['mensaje']]);
+    }
 }
 ?>
