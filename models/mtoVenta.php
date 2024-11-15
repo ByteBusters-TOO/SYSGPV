@@ -33,4 +33,16 @@ class Venta {
             return ['status' => false];
         }
     }
+    public function getHistorialVentas() {
+        // Consulta para obtener el historial de ventas
+        $query = "SELECT v.id_venta, v.fecha_venta, v.monto_venta, v.nombre_cliente, v.apellido_cliente, 
+                         v.correo_cliente, v.telefono_cliente, ca.numero_casa 
+                  FROM venta v
+                  JOIN casa ca ON v.id_casa = ca.id_casa"; // Relaciona la casa vendida con la tabla casa
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve todas las ventas
+    }
 }
+
