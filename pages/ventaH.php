@@ -60,7 +60,7 @@ $ventas = $venta->getHistorialVentas();
                         <td><?php echo $venta['nombre_cliente']; ?></td>
                         <td><?php echo $venta['numero_casa']; ?></td>
                         <td>
-                            <button class="btn btn-info btn-sm" onclick="verDetallesVenta(<?php echo $venta['id_venta']; ?>)">Ver Detalles</button>
+                            <a href="ventaDetalle.php?id=<?php echo $venta['id_venta']; ?>" class="btn btn-info btn-sm">Ver Detalles</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -71,16 +71,7 @@ $ventas = $venta->getHistorialVentas();
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        // Función para ver detalles de la venta
-        function verDetallesVenta(ventaId) {
-            // Lógica para ver detalles de la venta
-            alert('Ver detalles de la venta con ID ' + ventaId);
-            // Puedes redirigir a otra página que contenga detalles específicos de la venta
-            // window.location.href = 'detallesVenta.php?id=' + ventaId;
-        }
-    </script>
-    
+
     <footer class="footer py-4">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">

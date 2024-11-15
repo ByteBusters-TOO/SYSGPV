@@ -44,5 +44,19 @@ class Venta {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve todas las ventas
     }
+    public function getDetalleVenta($id_venta) {
+        $query = "SELECT v.id_venta, v.fecha_venta, v.monto_venta, v.nombre_cliente, v.apellido_cliente, 
+                         v.correo_cliente, v.telefono_cliente, ca.numero_casa
+                  FROM " . $this->table_name . " v
+                  JOIN casa ca ON v.id_casa = ca.id_casa
+                  WHERE v.id_venta = :id_venta";
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id_venta', $id_venta);
+        $stmt->execute();
+    
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 
