@@ -23,6 +23,8 @@ $(document).ready(function() {
         formData.append('ubicacion_proyecto', $('#ubicacion_proyecto').val());
         formData.append('fecha_inicio', $('#fecha_inicio').val());
         formData.append('fecha_fin', $('#fecha_fin').val());
+        formData.append('estado_proyecto', $('#estado_proyecto').val());
+
 
         // Verificación de campos requeridos
         if (!$('#nombre_proyecto').val() || !$('#descripcion_proyecto').val() || !$('#fecha_inicio').val()) {
@@ -45,6 +47,9 @@ $(document).ready(function() {
                 console.log("Respuesta del servidor:", response);
                 if (response.status === 'success') {
                     showMessage('success', response.message);
+                    setTimeout(function() {
+                        window.location.href = 'proyectoVer.php'; // Redirigir después de mostrar el mensaje
+                    }, 3000); // Espera 3 segundos antes de redirigir
                     $('#crearProyectoForm')[0].reset();
                     $('#actionProyectoButton').text('Guardar Proyecto');
                     editProyectoId = null;

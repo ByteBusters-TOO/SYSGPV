@@ -29,6 +29,7 @@ $(document).ready(function() {
                     $('#ubicacion_proyecto').val(project.ubicacion_proyecto);
                     $('#fecha_inicio').val(project.fecha_inicio);
                     $('#fecha_fin').val(project.fecha_fin);
+                    $('#estado_proyecto').val(project.estado_proyecto);
                 } else {
                     showMessage('danger', response.message || "Error al cargar el proyecto");
                 }
@@ -47,11 +48,12 @@ $(document).ready(function() {
         formData.append('ubicacion_proyecto', $('#ubicacion_proyecto').val());
         formData.append('fecha_inicio', $('#fecha_inicio').val());
         formData.append('fecha_fin', $('#fecha_fin').val());
+        formData.append('estado_proyecto', $('#estado_proyecto').val());
         formData.append('_method', 'PUT');
         formData.append('id_proyecto', $('#id_proyecto').val());
 
         // Verificación de campos requeridos
-        if (!$('#nombre_proyecto').val() || !$('#descripcion_proyecto').val() || !$('#fecha_inicio').val()) {
+        if (!$('#nombre_proyecto').val() || !$('#descripcion_proyecto').val() || !$('#fecha_inicio').val() || !$('#estado_proyecto').val()) {
             showMessage('danger', "Complete los campos requeridos");
             return;
         }
@@ -65,7 +67,9 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status === 'success') {
                     showMessage('success', response.message); // Mostrar mensaje de éxito
-
+                    setTimeout(function() {
+                        window.location.href = 'proyectoVer.php'; // Redirigir después de mostrar el mensaje
+                    }, 3000); // Espera 3 segundos antes de redirigir
                     // Limpiar el formulario después de la edición
                     $('#crearProyectoForm')[0].reset(); // Resetea el formulario
                     $('#updateProyectoButton').text('Guardar Proyecto'); // Vuelve al texto original

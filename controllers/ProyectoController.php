@@ -40,18 +40,19 @@ try {
                 $ubicacion_proyecto = $_POST['ubicacion_proyecto'] ?? null;
                 $fecha_inicio = $_POST['fecha_inicio'] ?? null;
                 $fecha_fin = $_POST['fecha_fin'] ?? null;
+                $estado_proyecto = $_POST['estado_proyecto'] ?? null;
 
                 // Validación de campos obligatorios
-                if (!$nombre_proyecto || !$descripcion_proyecto || !$fecha_inicio) {
+                if (!$nombre_proyecto || !$descripcion_proyecto || !$fecha_inicio || !$estado_proyecto) {
                     throw new Exception('Datos incompletos al guardar');
                 }
                 if ($proyectoModel->existsByName($nombre_proyecto)) {
                     throw new Exception('Ya existe un proyecto con el mismo nombre');
                 }
 
-                if ($proyectoModel->create($nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin)) {
+                if ($proyectoModel->create($nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin, $estado_proyecto)) {
                     $response = ['status' => 'success', 'message' => 'Proyecto creado con éxito'];
-                } else {
+                }  else {
                     throw new Exception('Error al crear el proyecto');
                 }
             } catch (Exception $e) {
@@ -68,13 +69,14 @@ try {
                 $ubicacion_proyecto = $_POST['ubicacion_proyecto'] ?? null;
                 $fecha_inicio = $_POST['fecha_inicio'] ?? null;
                 $fecha_fin = $_POST['fecha_fin'] ?? null;
+                $estado_proyecto = $_POST['estado_proyecto'] ?? null;
 
                 // Validación de campos obligatorios
-                if (!$id_proyecto || !$nombre_proyecto || !$descripcion_proyecto || !$fecha_inicio) {
+                if (!$id_proyecto || !$nombre_proyecto || !$descripcion_proyecto || !$fecha_inicio || !$estado_proyecto) {
                     throw new Exception('Datos incompletos para actualizar');
                 }
 
-                if ($proyectoModel->update($id_proyecto, $nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin)) {
+                if ($proyectoModel->update($id_proyecto, $nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin, $estado_proyecto)) {
                     $response = ['status' => 'success', 'message' => 'Proyecto actualizado con éxito'];
                 } else {
                     throw new Exception('Error al actualizar el proyecto');

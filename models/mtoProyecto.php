@@ -12,7 +12,7 @@ class Proyecto {
     }
 
     public function readAll() {
-        $query = "SELECT id_proyecto, nombre_proyecto, descripcion_proyecto, ubicacion_proyecto, fecha_inicio, fecha_fin FROM proyecto ORDER BY id_proyecto";
+        $query = "SELECT id_proyecto, nombre_proyecto, descripcion_proyecto, ubicacion_proyecto, fecha_inicio, fecha_fin, estado_proyecto FROM proyecto ORDER BY id_proyecto";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,24 +34,25 @@ class Proyecto {
         return $stmt->fetchColumn() > 0;  // Devuelve true si ya existe, false si no
     }
 
-    public function create($nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin) {
+    public function create($nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin, $estado_proyecto) {
         try {
-            $query = "INSERT INTO " . $this->table_name . " (nombre_proyecto, descripcion_proyecto, ubicacion_proyecto, fecha_inicio, fecha_fin) VALUES (:nombre_proyecto, :descripcion_proyecto, :ubicacion_proyecto, :fecha_inicio, :fecha_fin)";
+            $query = "INSERT INTO " . $this->table_name . " (nombre_proyecto, descripcion_proyecto, ubicacion_proyecto, fecha_inicio, fecha_fin, estado_proyecto) VALUES (:nombre_proyecto, :descripcion_proyecto, :ubicacion_proyecto, :fecha_inicio, :fecha_fin, :estado_proyecto)";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':nombre_proyecto', $nombre_proyecto);
             $stmt->bindParam(':descripcion_proyecto', $descripcion_proyecto);
             $stmt->bindParam(':ubicacion_proyecto', $ubicacion_proyecto);
             $stmt->bindParam(':fecha_inicio', $fecha_inicio);
             $stmt->bindParam(':fecha_fin', $fecha_fin);
-            
+            $stmt->bindParam(':estado_proyecto', $estado_proyecto);
+
             return $stmt->execute();  // Retorna true si se inserta con éxito, false en caso contrario
         } catch (PDOException $e) {
             return false;  // Devuelve false en caso de error
         }
     }
 
-    public function update($id_proyecto, $nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin) {
-        $query = "UPDATE " . $this->table_name . " SET nombre_proyecto = :nombre_proyecto, descripcion_proyecto = :descripcion_proyecto, ubicacion_proyecto = :ubicacion_proyecto, fecha_inicio = :fecha_inicio, fecha_fin = :fecha_fin WHERE id_proyecto = :id_proyecto";
+    public function update($id_proyecto, $nombre_proyecto, $descripcion_proyecto, $ubicacion_proyecto, $fecha_inicio, $fecha_fin, $estado_proyecto) {
+        $query = "UPDATE " . $this->table_name . " SET nombre_proyecto = :nombre_proyecto, descripcion_proyecto = :descripcion_proyecto, ubicacion_proyecto = :ubicacion_proyecto, fecha_inicio = :fecha_inicio, fecha_fin = :fecha_fin, estado_proyecto = :estado_proyecto  WHERE id_proyecto = :id_proyecto";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nombre_proyecto', $nombre_proyecto);
         $stmt->bindParam(':descripcion_proyecto', $descripcion_proyecto);
@@ -59,6 +60,7 @@ class Proyecto {
         $stmt->bindParam(':fecha_inicio', $fecha_inicio);
         $stmt->bindParam(':fecha_fin', $fecha_fin);
         $stmt->bindParam(':id_proyecto', $id_proyecto);
+        $stmt->bindParam(':estado_proyecto', $estado_proyecto);
         return $stmt->execute();  // Ejecutar la actualización
     }
 
