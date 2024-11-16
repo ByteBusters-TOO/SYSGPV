@@ -23,6 +23,8 @@ $(document).ready(function() {
         formData.append('ubicacion_proyecto', $('#ubicacion_proyecto').val());
         formData.append('fecha_inicio', $('#fecha_inicio').val());
         formData.append('fecha_fin', $('#fecha_fin').val());
+        formData.append('estado_proyecto', $('#estado_proyecto').val());
+
 
         // Verificación de campos requeridos
         if (!$('#nombre_proyecto').val() || !$('#descripcion_proyecto').val() || !$('#fecha_inicio').val()) {

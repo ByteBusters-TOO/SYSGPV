@@ -49,6 +49,15 @@
                 <label for="fecha_fin" class="form-label">Fecha de Finalización</label>
                 <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
             </div>
+            <div class="mb-3">
+                <label for="estado_proyecto" class="form-label">Estado del Proyecto</label>
+                <select class="form-control" id="estado_proyecto" name="estado_proyecto">
+                    <option value="">Seleccione un estado</option>
+                    <option value="En curso">En curso</option>
+                    <option value="Completado">Completado</option>
+                    <option value="Atrasado">Atrasado</option>
+                </select>
+            </div>
             <button type="button" class="btn btn-primary" id="actionProyectoButton">Guardar Proyecto</button>
         </form>
     </div>
