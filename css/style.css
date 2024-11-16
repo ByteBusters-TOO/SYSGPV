@@ -8,3 +8,9 @@
     height: 110px; /* Ajusta el tamaño del logo para que encaje en la navbar */
     width: auto; /* Mantiene la proporción */
 }
+
+.form-select{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
