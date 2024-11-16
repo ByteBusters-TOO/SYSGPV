@@ -36,6 +36,7 @@
                 <th>Ubicación</th>
                 <th>Inicio</th>
                 <th>Fin</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
             <?php if (count($proyectos) > 0): ?>
@@ -46,6 +47,7 @@
                         <td><?= htmlspecialchars($row["ubicacion_proyecto"]) ?></td>
                         <td><?= htmlspecialchars($row["fecha_inicio"]) ?></td>
                         <td><?= htmlspecialchars($row["fecha_fin"]) ?></td>
+                        <td><?= htmlspecialchars($row["estado_proyecto"]) ?></td>
                         <td>
                             <a href='proyectoEdit.php?id=<?= $row["id_proyecto"] ?>' class='btn btn-primary btn-sm'>Editar</a>
                         </td>
