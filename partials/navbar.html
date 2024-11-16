@@ -20,8 +20,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="..\pages\empresas.php">Empresas</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="..\pages\Reportes.php">Reportes</a>
+                    <!-- Menú para Reportes-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="proyectosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reportes
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="proyectosDropdown">
+                            <li><a class="dropdown-item" href="reportes.php?action=ver">Crear Reportes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="dashboard.php?action=crear">Dashboard</a></li>
+                        </ul>
                     </li>
                     <!-- Menú para Ventas y Construcciones -->
                     <li class="nav-item dropdown">
@@ -46,6 +54,16 @@
                             <li><a class="dropdown-item" href="proyectoVer.php?action=ver">Ver Proyectos</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="proyecto.php?action=crear">Crear Proyecto</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Alertas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="alertasDropdown">
+                            <li><a class="dropdown-item" href="alertaVer.php?action=ver">Ver Alarmas</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="alertaNueva.php?action=crear">Crear Alarma</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
