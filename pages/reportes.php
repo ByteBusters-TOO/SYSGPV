@@ -31,8 +31,8 @@
         <div class="mensaje mb-3"></div>
 
         <form>
-
-            <select class="form-select" aria-label="Default select example">
+        <label for="tipoReporte">Selecciona el tipo de reporte</label>
+            <select id="tipoReporte" class="form-select" aria-label="Default select example">
                 <option selected>Tipo de reporte</option>
                 <option value="1">Ventas</option>
                 <option value="2">Casas</option>
