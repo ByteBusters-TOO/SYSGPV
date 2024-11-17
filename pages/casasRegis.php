@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,17 +18,18 @@
         }
     </style>
 </head>
+
 <body>
-    <?php 
-        include '../partials/navbar.html';
-        require_once '../models/mtoProyecto.php'; // Asegúrate de que el archivo esté en la ruta correcta
-        $proyectoModel = new Proyecto();
-        $proyectos = $proyectoModel->readAll();  // Obtenemos todos los proyectos
+    <?php
+    include '../partials/navbar.html';
+    require_once '../models/mtoProyecto.php'; // Asegúrate de que el archivo esté en la ruta correcta
+    $proyectoModel = new Proyecto();
+    $proyectos = $proyectoModel->readAll();  // Obtenemos todos los proyectos
     ?>
 
     <div class="container mt-5">
         <h2>Registrar Nueva Casa</h2>
-        
+
         <div class="mensaje mb-3"></div>
 
         <form id="registrarCasaForm">
@@ -51,7 +53,9 @@
                 <select class="form-control" id="id_proyecto" name="id_proyecto" required>
                     <option value="">Seleccionar Proyecto</option>
                     <?php foreach ($proyectos as $proyecto): ?>
-                        <option value="<?= $proyecto['id_proyecto'] ?>"><?= htmlspecialchars($proyecto['nombre_proyecto']) ?></option>
+                        <option value="<?= $proyecto['id_proyecto'] ?>">
+                            <?= htmlspecialchars($proyecto['nombre_proyecto']) ?> (<?= htmlspecialchars($proyecto['estado_proyecto']) ?>)
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -62,7 +66,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/casa.js"></script>
-    
+
     <footer class="footer py-4">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
@@ -75,4 +79,5 @@
         </div>
     </footer>
 </body>
+
 </html>

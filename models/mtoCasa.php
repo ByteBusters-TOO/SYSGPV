@@ -2,17 +2,20 @@
 
 require_once '../controllers/db_config.php';
 
-class Casa {
+class Casa
+{
     private $conn;
     private $table_name = "casa";
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
 
     // Función para verificar si ya existe una casa con el mismo número en el mismo proyecto
-    public function existsInProject($numero_casa, $id_proyecto) {
+    public function existsInProject($numero_casa, $id_proyecto)
+    {
         $query = "SELECT COUNT(*) FROM " . $this->table_name . " WHERE numero_casa = :numero_casa AND id_proyecto = :id_proyecto";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':numero_casa', $numero_casa);
@@ -21,10 +24,25 @@ class Casa {
         return $stmt->fetchColumn() > 0;  // Devuelve true si ya existe, false si no
     }
 
-    public function create($numero_casa, $estado_casa, $precio_casa, $id_proyecto) {
+    public function create($numero_casa, $estado_casa, $precio_casa, $id_proyecto)
+    {
         // Verificar si ya existe una casa con el mismo número en el mismo proyecto
         if ($this->existsInProject($numero_casa, $id_proyecto)) {
             return ['status' => false, 'mensaje' => 'Ya existe una casa con ese número en este proyecto.'];
+        }
+        // Nueva validación: verificar el estado del proyecto
+        try {
+            $queryProyecto = "SELECT estado_proyecto FROM proyecto WHERE id_proyecto = :id_proyecto";
+            $stmtProyecto = $this->conn->prepare($queryProyecto);
+            $stmtProyecto->bindParam(':id_proyecto', $id_proyecto);
+            $stmtProyecto->execute();
+            $estadoProyecto = $stmtProyecto->fetchColumn();
+
+            if ($estado_casa === 'Lista para la Venta' && $estadoProyecto !== 'Completado') {
+                return ['status' => false, 'mensaje' => 'El proyecto debe estar en estado "Completado" para registrar una casa como "Lista para la Venta".'];
+            }
+        } catch (PDOException $e) {
+            return ['status' => false, 'mensaje' => 'Error al verificar el estado del proyecto: ' . $e->getMessage()];
         }
 
         // Insertar la nueva casa si no existe un duplicado
@@ -45,7 +63,8 @@ class Casa {
             return ['status' => false, 'mensaje' => 'Error: ' . $e->getMessage()];
         }
     }
-    public function getCasaPorId($id_casa) {
+    public function getCasaPorId($id_casa)
+    {
         try {
             $query = "SELECT c.id_casa, c.numero_casa, c.estado_casa, c.precio_casa, 
                              c.id_proyecto, p.nombre_proyecto
@@ -66,7 +85,8 @@ class Casa {
             return null;
         }
     }
-    public function getCasasDisponibles() {
+    public function getCasasDisponibles()
+    {
         $query = "SELECT c.id_casa, c.numero_casa, c.estado_casa, c.precio_casa, c.id_proyecto, p.nombre_proyecto AS proyecto
                   FROM " . $this->table_name . " c
                   JOIN proyecto p ON c.id_proyecto = p.id_proyecto
@@ -75,8 +95,9 @@ class Casa {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Devuelve todas las casas que están listas para la venta
     }
-     // Método para actualizar el estado de la casa a "Vendida"
-     public function actualizarEstadoVendido($id_casa) {
+    // Método para actualizar el estado de la casa a "Vendida"
+    public function actualizarEstadoVendido($id_casa)
+    {
         try {
             // Actualizar el estado de la casa a "Vendida"
             $query = "UPDATE " . $this->table_name . " SET estado_casa = 'Vendida' WHERE id_casa = :id_casa";
@@ -92,8 +113,19 @@ class Casa {
             return ['status' => false, 'mensaje' => 'Error: ' . $e->getMessage()];
         }
     }
-    public function actualizarCasa($id_casa, $numero_casa, $estado_casa, $precio_casa, $id_proyecto) {
+    public function actualizarCasa($id_casa, $numero_casa, $estado_casa, $precio_casa, $id_proyecto)
+    {
         try {
+            // Nueva validación: verificar el estado del proyecto
+            $queryProyecto = "SELECT estado_proyecto FROM proyecto WHERE id_proyecto = :id_proyecto";
+            $stmtProyecto = $this->conn->prepare($queryProyecto);
+            $stmtProyecto->bindParam(':id_proyecto', $id_proyecto);
+            $stmtProyecto->execute();
+            $estadoProyecto = $stmtProyecto->fetchColumn();
+
+            if ($estado_casa === 'Lista para la Venta' && $estadoProyecto !== 'Completado') {
+                return ['status' => false, 'mensaje' => 'El proyecto debe estar en estado "Completado" para que la casa pueda ser "Lista para la Venta".'];
+            }
             $query = "UPDATE " . $this->table_name . " 
                       SET numero_casa = :numero_casa, estado_casa = :estado_casa, 
                           precio_casa = :precio_casa, id_proyecto = :id_proyecto
@@ -114,6 +146,5 @@ class Casa {
             error_log("Error en " . __METHOD__ . ": " . $e->getMessage());
             return ['status' => false, 'mensaje' => 'Error interno.'];
         }
-    
-}
+    }
 }
