@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,24 @@
     <style>
         /* Estilo adicional para la marca de copyright */
         .copyright {
-    position: fixed;
-    bottom: 0;
-    
-    width: 100%;
-    text-align: right;
-    padding: 10px 10px;
-    color: #6c757d; /* Color del texto */
-}
+            position: fixed;
+            bottom: 0;
+
+            width: 100%;
+            text-align: right;
+            padding: 10px 10px;
+            color: #6c757d;
+            /* Color del texto */
+        }
     </style>
 </head>
+
 <body>
     <?php include '../partials/navbar.html'; ?>
 
     <div class="container mt-5">
         <h2>Crear Nuevo Proyecto</h2>
-        
+
         <!-- Contenedor de mensaje -->
         <div class="mensaje mb-3"></div>
 
@@ -58,7 +61,10 @@
                     <option value="Atrasado">Atrasado</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary" id="actionProyectoButton">Guardar Proyecto</button>
+            <button type="button" class="btn btn-info btn-sm" id="actionProyectoButton" style="min-width: 80px;">
+                <i class="bi bi-pencil"></i> Guardar Proyecto
+            </button>
+
         </form>
     </div>
 
@@ -67,14 +73,15 @@
     <script src="../js/proyecto.js"></script> <!-- Referencia al archivo JS externo -->
     <footer class="footer py-4  ">
         <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © 2024 | BYTE BUSTERS
-              </div>
+            <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="copyright text-center text-sm text-muted text-lg-start">
+                        © 2024 | BYTE BUSTERS
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </footer>
+    </footer>
 </body>
+
 </html>
