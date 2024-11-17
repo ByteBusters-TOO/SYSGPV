@@ -63,11 +63,40 @@
                         <ul class="dropdown-menu" aria-labelledby="alertasDropdown">
                             <li><a class="dropdown-item" href="alertaVer.php?action=ver">Ver Alarmas</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="alertaNueva.php?action=crear">Crear Alarma</a></li>
+                            <li><a className="fixed top-4 right-4 flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors" href="alertaNueva.php?action=crear">Crear Alarma</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Salir</a>
+                    <li class="nav-item position-fixed" style="top: 1rem; right: 1rem;">
+                        <div class="dropdown">
+                             <!-- Botón que activa el dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../src/image/user-icon.png" alt="Logo" class="img-fluid rounded-circle" style="width: 40px; height: 40px;">
+                            </a>
+                            <!-- Menú desplegable -->
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <!-- Encabezado con el nombre del usuario  -->
+                                <li><h6 class="dropdown-header">Usuario</h6></li>
+                                
+                                <!-- Opción de Roles -->
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="../pages/rolesUsuario.php">
+                                        <i class="bi bi-person-gear"></i>
+                                        Configuración de Roles
+                                    </a>
+                                </li>
+                                
+                                <!-- Divisor -->
+                                <li><hr class="dropdown-divider"></li>
+                                
+                                <!-- Cerrar Sesión -->
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="../index.php">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        Cerrar Sesión
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
