@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="homeDueño.php">
+                <img src="..\src\image\Logo.svg" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <!-- Menú para Empresas -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="..\pages\empresas.php">Empresas</a>
+                    </li>
+                    <!-- Menú para Reportes -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="proyectosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reportes
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="proyectosDropdown">
+                            <li><a class="dropdown-item" href="reportes.php?action=ver">Crear Reportes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="dashboard.php?action=crear">Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <!-- Menú de usuario con Cerrar Sesión -->
+                    <li class="nav-item position-fixed" style="top: 1rem; right: 1rem;">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../src/image/user-icon.png" alt="Logo" class="img-fluid rounded-circle" style="width: 40px; height: 40px;">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <!-- Encabezado con el nombre del usuario -->
+                                <li><h6 class="dropdown-header">Usuario</h6></li>
+                                <!-- Divisor -->
+                                <li><hr class="dropdown-divider"></li>
+                                <!-- Cerrar Sesión -->
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="../index.php">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        Cerrar Sesión
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzWk5DAvH6ft7bO1tvWZjBcpEQ+aWOz2X3Rm9gqraKW5" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-cn7l7gDp0eyCkIe+4F0xNrryM+9e4eRGnZd8lg5loca2roEmCqIwZ5qtm5xtbtIJ" crossorigin="anonymous"></script>
+
+</body>
+</html>

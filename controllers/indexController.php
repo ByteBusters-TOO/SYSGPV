@@ -28,7 +28,7 @@ try {
                 $response = ['status' => 'success', 'redirect' => './pages/home.php'];
             } elseif ($user['id_rol'] == 2) {//Si es dueño
                 //Redirigimos al usuario a su vista
-                $response = ['status' => 'success', 'redirect' => './pages/home.php'];
+                $response = ['status' => 'success', 'redirect' => './pages/homeDueño.php'];
             }
         } else {//Si el correo o la contraseña son incorrectos mostramos un mensaje de error
             throw new Exception('Usuario o contraseña incorrectos.' .$user. " ERROR");
