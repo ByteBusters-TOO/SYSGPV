@@ -25,7 +25,13 @@ class RoleModel {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            throw new Exception('El rol solicitado no existe.');
+        }
+        
+        return $result;
     }
 
     // Crear nuevo rol
@@ -41,7 +47,6 @@ class RoleModel {
             return false;  // Devuelve false en caso de error
         }
     }
-
 
     // Verificar si existe el tipo de rol
     public function roleNameExists($tipo_usuario) {
@@ -71,17 +76,14 @@ class RoleModel {
 }
 
     // Actualizar rol
-    public function updateRole($id, $tipo_usuario, $descripcion_usuario) {
-            $query = "UPDATE " . $this->table_name . " 
-                     SET tipo_usuario = :tipo_usuario, 
-                         descripcion_usuario = :descripcion_usuario 
-                     WHERE id_rol = :id";
-                     
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':tipo_usuario', $tipo_usuario);
-            $stmt->bindParam(':descripcion_usuario', $descripcion_usuario);
-            return $stmt->execute();  // Ejecutar la actualización
+    public function updateRole($id_rol, $tipo_usuario, $descripcion_usuario) {
+        $query = "UPDATE " . $this->table_name . " SET tipo_usuario = :tipo_usuario, descripcion_usuario = :descripcion_usuario  WHERE id_rol = :id_rol";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':tipo_usuario', $tipo_usuario);
+        $stmt->bindParam(':descripcion_usuario', $descripcion_usuario);
+        $stmt->bindParam(':id_rol', $id_rol);
+        return $stmt->execute();  // Ejecutar la actualización
     }
+    
 }
 ?>

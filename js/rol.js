@@ -23,9 +23,7 @@ $(document).ready(function() {
         // Mostrar el modal
         const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
         messageModal.show();
-    }
-    
-    
+    }   
 
     // Leer todos los tipos de usuario
     function readAllTipoUsuarios() {
@@ -71,7 +69,7 @@ $(document).ready(function() {
         });
     }
 
-    // Crear o modificar roles
+    // Crear roles
     $('#actionTipoUsuarioButton').click(function() {
         console.log("Botón Guardar Roles presionado");
         var formData = new FormData();
@@ -100,10 +98,8 @@ $(document).ready(function() {
                 console.log("Respuesta del servidor:", response);
                 if (response.status === 'success') {
                     showMessage('success', response.message);
-                    setTimeout(function() {
-                        window.location.href = 'rolesUsuario.php'; // Redirigir después de mostrar el mensaje
-                    }, 3000); // Espera 3 segundos antes de redirigir
                     $('#createTipoUsuarioModal').modal('hide'); // Cerrar el modal de formulario
+                    $('#updateTipoUsuario').modal('hide');
                     readAllTipoUsuarios(); // Recargar tabla
                     editTipoUsuarioId = null;
                 } else {
@@ -150,26 +146,61 @@ $(document).ready(function() {
         editTipoUsuarioId = null;
     });
 
-    // Modificar el evento del botón de editar para que abra el modal
-    $('#tipoUsuarioTable').on('click', '.editButton', function() {
-        var id = $(this).data('id');
+    // Manejar clic en el botón Modificar
+    $('#tipoUsuarioTable').on('click', '.editButton', function () {
+        var id = $(this).data('id'); // Obtener el ID del rol seleccionado
+    
         $.ajax({
             url: '../controllers/rolesUsuarioController.php?id=' + id,
             type: 'GET',
-            success: function(response) {
-                $('#tipo_usuario').val(response.tipo_usuario);
-                $('#descripcion_usuario').val(response.descripcion_usuario);
-                $('#actionTipoUsuarioButton').text('Modificar');
-                $('#createTipoUsuarioModalLabel').text('Modificar Tipo de Rol');
-                editTipoUsuarioId = id;
-                $('#createTipoUsuarioModal').modal('show');
+            dataType: 'json',
+            success: function (response) {
+                console.log("Respuesta parseada automáticamente:", response);
+                // Rellenar los campos del formulario
+                $('#editTipoUsuarioModal .tipo-usuario-input').val(response.tipo_usuario);
+                $('#editTipoUsuarioModal .descripcion-usuario-textarea').val(response.descripcion_usuario);
+                
+                // Cambiar texto del botón y mostrar el modal
+                $('#actionTipoUsuarioButton').text('Guardar');
+                // Mostrar el modal de edición
+                $('#editTipoUsuarioModal').modal('show');
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                showMessage('danger', "Error en la solicitud: " + textStatus + " - " + errorThrown);
+            error: function (jqXHR, textStatus, errorThrown) {
+                showMessage('danger', 'Error al cargar los datos: ' + textStatus);
+            }
+        });
+    });    
+
+    $('#editActionTipoUsuarioButton').on('click', function () {
+        // Se envían los datos del formulario de edición
+        var tipoUsuario = $('#edit_tipo_usuario').val();
+        var descripcionUsuario = $('#edit_descripcion_usuario').val();
+
+        console.log({
+            tipo_usuario: tipoUsuario,
+            descripcion_usuario: descripcionUsuario
+        }); // Verificar qué datos se están enviando
+    
+        $.ajax({
+            url: '../controllers/rolesUsuarioController.php',
+            type: 'POST',
+            data: {
+                action: 'update',
+                tipo_usuario: tipoUsuario,
+                descripcion_usuario: descripcionUsuario
+            },
+            success: function(response) {
+                console.log('Respuesta del servidor:', response);
+                showMessage('success', response.message);
+                $('#editTipoUsuarioModal').modal('hide');
+                readAllTipoUsuarios();
+            },
+            error: function () {
+                alert('Error al actualizar el rol.');
             }
         });
     });
-
+    
     // Inicializar
     readAllTipoUsuarios();
 
