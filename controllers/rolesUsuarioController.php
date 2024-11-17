@@ -18,14 +18,14 @@ try {
 
     switch ($method) {// Verifica el método HTTP de la solicitud y actúa en consecuencia
         case 'GET':
-            // Si la solicitud es GET y se pasa un parámetro 'id', lee un tipo de usuario específico
+            // Si la solicitud es GET y se pasa un parámetro 'id', lee un tipo de rol en específico
             if (isset($_GET['id'])) { 
                 $response = $tipoUsuarioModel->read($_GET['id']);
             } else {
-                // Si no se pasa 'id', lee todos los tipos de usuarios
+                // Si no se pasa 'id', lee todos los tipos de roles
                 $response = $tipoUsuarioModel->getAllRoles();
             }
-            break;
+            break;        
 
         case 'POST':
             try {
@@ -41,7 +41,7 @@ try {
                 }
 
                 if ($tipoUsuarioModel->createRole($tipo_usuario, $descripcion_usuario)) {
-                    $response = ['status' => 'success', 'message' => 'Rol creado con éxito'];
+                    $response = ['status' => 'success', 'message' => 'Rol creado con éxito.'];
                 }  else {
                     throw new Exception('Error al crear el rol.');
                 }
@@ -50,14 +50,25 @@ try {
             }
             break;
 
-        case 'PUT':
-            $data = json_decode(file_get_contents("php://input"), true);
-            if (!isset($data['id']) || !isset($data['tipo_usuario']) || !isset($data['descripcion_usuario'])) {
-                throw new Exception('Datos incompletos.');
-            }
-            $tipoUsuarioModel->updateRole($data['id'], $data['tipo_usuario'], $data['descripcion_usuario']);
-            $response = ['status' => 'success', 'message' => 'Tipo de usuario actualizado con éxito.'];
-            break;
+            case 'PUT':
+                try{
+                    $id_rol = $_POST['id_rol'] ?? null;
+                    $tipo_usuario = $_POST['tipo_usuario'] ?? null;
+                    $descripcion_usuario = $_POST['descripcion_usuario'] ?? null;
+                
+                    if (!$id_rol || !$tipo_usuario || !$descripcion_usuario) {
+                        throw new Exception('Datos incompletos.');
+                    }
+                    if ($tipoUsuarioModel->updateRole($id_rol, $tipo_usuario, $descripcion_usuario)) {
+                        $response = ['status' => 'success', 'message' => 'Rol actualizado con éxito.'];
+                    } else {
+                        throw new Exception('Error al actualizar el rol.');
+                    }
+                }catch (Exception $e){
+                    $response = ['status' => 'error', 'message' => $e->getMessage()];
+                }
+                
+                break;            
 
         case 'DELETE':
             $data = json_decode(file_get_contents("php://input"), true);

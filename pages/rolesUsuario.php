@@ -35,7 +35,7 @@
                 </button>
             </div>
 
-            <!-- Modal para Crear/Editar Tipo de Usuario -->
+            <!-- Modal para Crear Tipo de Usuario -->
             <div class="modal fade" id="createTipoUsuarioModal" tabindex="-1" aria-labelledby="createTipoUsuarioModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -64,9 +64,33 @@
                     </div>
                 </div>
             </div>
-
-
-
+            <!-- Modal para Editar Tipo de Usuario -->
+            <div class="modal fade" id="editTipoUsuarioModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form id="editTipoUsuarioForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar Rol de Usuario</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="edit_tipo_usuario" class="form-label">Nombre del Rol:</label>
+                                    <input type="text" class="tipo-usuario-input form-control" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit_descripcion_usuario" class="form-label">Descripción:</label>
+                                    <textarea class="descripcion-usuario-textarea form-control" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" id="editActionTipoUsuarioButton">Actualizar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -105,7 +129,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ¿Está seguro de que desea eliminar este tipo de usuario?
+                            ¿Está seguro de que desea eliminar este tipo de rol?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
