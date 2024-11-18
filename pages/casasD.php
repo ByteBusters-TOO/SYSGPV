@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['tpu'] == 2)
+    header("Location: ../pages/homeDueño.php");
+elseif (!isset($_SESSION['user']) || $_SESSION['tpu'] > 3) 
+  header("Location: ./index.php");
+
 require_once '../models/mtoCasa.php';
 
 // Crear instancia del modelo

@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['tpu'] == 2)
+    header("Location: ../pages/homeDueño.php");
+elseif (!isset($_SESSION['user']) || $_SESSION['tpu'] > 3) 
+  header("Location: ./index.php");
+
 // Verificar si los parámetros 'id' y 'precio' están presentes en la URL
 $idCasa = isset($_GET['id']) ? $_GET['id'] : '';
 $precioCasa = isset($_GET['precio']) ? $_GET['precio'] : '';
