@@ -36,7 +36,7 @@
                 <option selected>Tipo de reporte</option>
                 <option value="1">Ventas</option>
                 <option value="2">Casas</option>
-                <option value="2">Proyectos</option>
+                <option value="3">Proyectos</option>
             </select>
             <div class="mb-3">
                 <label for="descripcion_proyecto" class="form-label">Descripción de reporte</label>
