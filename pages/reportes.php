@@ -60,38 +60,18 @@
                 <input type="text" class="form-control">
             </div>
 
-            <button type="button" class="btn btn-primary">Generar reporte</button>
+            <button type="button" id="generarReporteButton" class="btn btn-primary">Generar reporte</button>
         </form>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/proyecto.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+
+
+    <script src="../js/reportes.js"></script>
 
     <footer class="footer py-4">
         <div class="container-fluid">
