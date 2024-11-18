@@ -30,7 +30,6 @@ $(document).ready(function() {
                     $('#tipo_alerta').val(alerta.tipo_alerta);
                     $('#id_rol').val(alerta.id_rol);
                     $('#id_proyecto').val(alerta.id_proyecto);
-                    $('#id_casa').val(alerta.id_casa);
                 } else {
                     showMessage('danger', response.message || "Error al cargar la alerta.");
                 }
@@ -50,12 +49,11 @@ $(document).ready(function() {
         formData.append('tipo_alerta', $('#tipo_alerta').val());
         formData.append('id_usuario', $('#id_usuario').val());
         formData.append('id_proyecto', $('#id_proyecto').val());
-        formData.append('id_casa', $('#id_casa').val());
         formData.append('_method', 'PUT');
         formData.append('id_alerta', $('#id_alerta').val());
 
         // Verificación de campos requeridos
-        if (!$('#estado_alerta').val() || !$('#asunto_alerta').val() || !$('#fecha_alerta').val() || !$('#tipo_alerta').val() ||!$('#id_rol').val() || !$('#id_proyecto').val()  || !$('#id_casa') ) {
+        if (!$('#estado_alerta').val() || !$('#asunto_alerta').val() || !$('#fecha_alerta').val() || !$('#tipo_alerta').val() ||!$('#id_rol').val() || !$('#id_proyecto').val()){
             showMessage('danger', "Complete los campos requeridos.");
             return;
         }

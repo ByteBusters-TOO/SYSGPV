@@ -41,37 +41,33 @@
 
         <form id="createAlertaForm">
             <div class="mb-3">
-                <label for="tipoAlerta" class="form-label">Selecciona el tipo de alerta:</label>
-                <select id="tipoAlerta" class="form-select" aria-label="Default select example">
+                <label for="tipo_alerta" class="form-label">Seleccionar tipo de alerta:</label>
+                <select id="tipo_alerta" name="estado_alerta" class="form-control" aria-label="Default select example">
                     <option selected>Tipo de alerta</option>
                     <option value="1">Proyecto atrasado</option>
                     <option value="2">Inactividad ventas de casa</option>
                     <option value="3">Otro</option>
                 </select>
             </div>
-
             <div class="mb-3">
                 <label for="fecha_alerta" class="form-label">Fecha de alerta:</label>
                 <input type="date" id="fecha_alerta" class="form-control">
             </div>
-
             <div class="mb-3">
                 <label for="asunto_alerta" class="form-label">Asunto:</label>
                 <textarea id="asunto_alerta" class="form-control" rows="4"></textarea>
             </div>
-
             <div class="mb-3">
-                <label for="estadoAlerta" class="form-label">Selecciona el estado de alerta:</label>
-                <select id="estadoAlerta" class="form-select" aria-label="Default select example">
+                <label for="estado_alerta" class="form-label">Selecciona el estado de alerta:</label>
+                <select id="estado_alerta" name="estado_alerta" class="form-control" aria-label="Default select example">
                     <option selected>Estado de alerta</option>
                     <option value="1">Alta</option>
                     <option value="2">Media</option>
                     <option value="3">Baja</option>
                 </select>
             </div>
-
             <div class="mb-3">
-                <label for="id_proyecto" class="form-label">Proyecto Asociado</label>
+                <label for="id_proyecto" class="form-label">Proyecto asociado:</label>
                 <select class="form-control" id="id_proyecto" name="id_proyecto" required>
                     <option value="">Seleccionar Proyecto</option>
                     <?php foreach ($proyectos as $proyecto): ?>
@@ -81,12 +77,17 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-
             <div class="mb-3">
                 <label for="id_usuario" class="form-label">Usuario asignado para alerta:</label>
-                <select id="id_usuario" name="id_usuario" class="form-select" required></select>
+                <select id="id_usuario" name="id_usuario" class="form-control" required>
+                <option value="">Seleccionar Usuario</option>
+                    <?php foreach ($usuarios as $usuario): ?>
+                        <option value="<?= htmlspecialchars($usuario['id_usuario'])?>">
+                            <?= htmlspecialchars($usuario['nombre_usuario']) ?>)
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-
             <button type="button" class="btn btn-info btn-sm mt-3" id="actionAlertaButton" style="min-width: 80px;">
                 <i class="bi bi-pencil"></i> Guardar Alerta
             </button>

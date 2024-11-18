@@ -43,7 +43,6 @@
                 <th>Fecha</th>
                 <th>Asunto</th>
                 <th>Estado</th>
-                <th>Casa asociada</th>
                 <th>Proyecto asociado</th>
                 <th>Usuario</th>
                 <th>Acciones</th>
@@ -55,7 +54,6 @@
                         <td><?= htmlspecialchars($row["fecha_alerta"]) ?></td>
                         <td><?= htmlspecialchars($row["asunto_alerta"]) ?></td>
                         <td><?= htmlspecialchars($row["estado_alerta"]) ?></td>
-                        <td><?= htmlspecialchars($row["id_casa"]) ?></td>
                         <td><?= htmlspecialchars($row["id_proyecto"]) ?></td>
                         <td><?= htmlspecialchars($row["id_usuario"]) ?></td>
                         <td>
