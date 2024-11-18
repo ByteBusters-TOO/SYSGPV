@@ -11,16 +11,16 @@ try {
     //Consultamos que tipo de metodo optiene el servidor
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //asignamos a una variable el dato enviado y consultamos a la vez si esta vacio o no
-        $nombre_usuario = isset($_POST['username']) ? $_POST['username'] : '';
+        $correo_usuario = isset($_POST['username']) ? $_POST['username'] : '';
         $contra = isset($_POST['password']) ? $_POST['password'] : '';
 
         $userModel = new mtoindex();//Instanciamos el modelo del index
-        $user = $userModel->authenticate($nombre_usuario, $contra); //Mandamos los datos a la autenticación
+        $user = $userModel->authenticate($correo_usuario, $contra); //Mandamos los datos a la autenticación
 
         //Consultamos que tipo de respuesta se obtuvo del metodo
         if ($user) {
             error_log($user['id_rol']);
-            $_SESSION['user'] = $user['nombre_usuario'];//Asignamos el correo como usuario de session
+            $_SESSION['user'] = $user['correo_usuario'];//Asignamos el correo como usuario de session
             $_SESSION['user_id'] = $user['id_usuario'];//Asignamos el ID del usuario para poder ocuparla en el navegador para la gestión
             $_SESSION['tpu'] = $user['id_rol'];//Asignamos el id del rol usuario a una variable de sesion
             if ($user['id_rol'] == 1) {//Si es administrador
