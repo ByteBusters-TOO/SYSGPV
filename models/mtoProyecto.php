@@ -70,5 +70,16 @@ class Proyecto {
         $stmt->bindParam(':id_proyecto', $id_proyecto);
         return $stmt->execute();
     }
+
+    public function getTotalProyectos() {
+        // Consulta para contar todos los proyectos
+        $query = "SELECT COUNT(*) as total_proyectos FROM proyecto";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_proyectos'];  // Retorna el total de proyectos
+    }
+    
+
 }
 ?>

@@ -18,65 +18,112 @@
     </style>
 </head>
 <body>
-    
+
 <?php
     include '../partials/navbar.html';
-    ?>
+    require_once '../models/mtoEmpresaCompetencia.php';
 
+    // Crear una instancia del modelo
+    $empresaModel = new EmpresaModel();
+
+    // Obtener todas las empresas
+    $empresas = $empresaModel->readAll();
+?>
 
 <div class="container mt-5">
-        <h2>Empresa</h2>
-        
-        <!-- Contenedor de mensaje -->
-        <div class="mensaje mb-3"></div>
+    <h2>Empresas de la competencia</h2>
+    <a href="crearEmpresa.php" class="btn btn-primary">Crear nueva</a>
 
-        <form id="crearProyectoForm">
-            <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Nombre</label>
-                <input type="text" class="form-control" required>
-            </div>
-           
-            <div class="mb-3">
-                <label for="ubicacion_proyecto" class="form-label">Ventas</label>
-                <textarea class="form-control"></textarea>
-            </div>
-           
-            <div class="mb-3">
-                <label for="descripcion_proyecto" class="form-label">Proyectos</label>
-                <textarea class="form-control" id="descripcion_proyecto" name="descripcion_proyecto" rows="4" required></textarea>
-            </div>
-            <button type="button" class="btn btn-primary">Guardar   </button>
-        </form>
+    <!-- Contenedor de mensaje -->
+    <div class="mensaje mb-3"></div>
 
-
-
-        <table class='table table-striped'>
+    <!-- Tabla de Empresas -->
+    <table id="empresaTable" class="table table-striped">
+        <thead>
             <tr>
-                <th>Nombre</th>
+                <th>#</th>
+                <th>Nombre de Empresa</th>
                 <th>Ventas</th>
-                <th>Proyecto</th>
+                <th>Proyectos</th>
                 <th>Acciones</th>
             </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Verificar si hay empresas y mostrarlas en la tabla
+            if (count($empresas) > 0) {
+                foreach ($empresas as $empresa) {
+                    echo "<tr>
+                        <td>{$empresa['id_empresa']}</td>
+                        <td>{$empresa['nombre_empresa']}</td>
+                        <td>{$empresa['ventas_empresa']}</td>
+                        <td>{$empresa['proyectos_empresa']}</td>
+                        <td>
+                            <a href='editarEmpresa.php?id=" . trim($empresa['id_empresa']) . "' class='btn btn-primary btn-sm'>Editar</a>
+                            <button class='btn btn-danger btn-sm deleteButton' data-id='{$empresa['id_empresa']}'>Eliminar</button>
+                        </td>
+                    </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5' class='text-center'>No hay empresas registradas.</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 
-
-
+    <!-- Modal de confirmación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">¿Estás seguro?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Quieres eliminar esta empresa?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+            </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal de Mensajes -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Información</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="messageModalBody">
+                <!-- Aquí se mostrará el mensaje -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/proyecto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/empresa.js"></script>
 
-    <footer class="footer py-4">
-        <div class="container-fluid">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-lg-6 mb-lg-0 mb-4">
-                    <div class="copyright text-center text-sm text-muted text-lg-start">
-                        © 2024 | BYTE BUSTERS
-                    </div>
+<footer class="footer py-4">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                    © 2024 | BYTE BUSTERS
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
 </body>
 </html>
