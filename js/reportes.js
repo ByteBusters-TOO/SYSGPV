@@ -15,17 +15,30 @@ $(document).ready(function () {
     // Generar reporte
     $('#generarReporteButton').click(function () {
         const tipo_reporte = $('#tipo_reporte').val();
-        console.log('Tipo de reporte seleccionado:', tipo_reporte); // Verificar tipo de reporte
+        const descripcion_reporte = $('#descripcion_reporte').val(); // Obtener descripción
+        const fecha_generacion = $('#fecha_generacion').val(); // Obtener fecha
 
+        console.log('Tipo de reporte seleccionado:', tipo_reporte); // Verificar tipo de reporte
+        console.log('Descripción del reporte:', descripcion_reporte);
+        console.log('Fecha de generación:', fecha_generacion);
         if (tipo_reporte === "Tipo de reporte") {
             showMessage('danger', 'Selecciona un tipo de reporte válido.');
+            return;
+        }
+        if (!descripcion_reporte) {
+            showMessage('danger', 'Ingresa una descripción para el reporte.');
+            return;
+        }
+
+        if (!fecha_generacion) {
+            showMessage('danger', 'Selecciona una fecha de generación.');
             return;
         }
 
         $.ajax({
             url: '../controllers/ReporteController.php',
             type: 'POST',
-            data: { tipo_reporte },
+            data: { tipo_reporte, descripcion_reporte, fecha_generacion },
             success: function (response) {
                 console.log('Respuesta completa:', response);  // Muestra toda la respuesta
                 console.log('Contenido:', response.data);     // Muestra solo el campo 'data'
@@ -94,6 +107,10 @@ $(document).ready(function () {
                         const nombreArchivo = response.data.nombreArchivo || 'reporte_generado';
                         doc.save(`${nombreArchivo}.pdf`);
                         showMessage('success', 'Reporte generado con éxito.');
+                         // Limpiar campos del formulario
+                         $('#tipo_reporte').val('Tipo de reporte'); // Restablecer el select
+                         $('#descripcion_reporte').val(''); // Limpiar descripción
+                         $('#fecha_generacion').val(''); // Limpiar fecha
                     } else {
                         console.log('Los datos de contenido no son válidos o están vacíos.');
                         showMessage('danger', 'Los datos del reporte no son válidos o están mal formateados.');

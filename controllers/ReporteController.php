@@ -1,12 +1,14 @@
 <?php
 session_start();
 require_once '../models/mtoReporte.php';
-
+// Respuesta por defecto
 header('Content-Type: application/json');
-
+// Capturar los datos del formulario
 $response = ['status' => 'error', 'message' => ''];
 $tipo_reporte = $_POST['tipo_reporte'] ?? null;
-
+$descripcion_reporte = $_POST['descripcion_reporte'] ?? null;
+$fecha_generacion = $_POST['fecha_generacion'] ?? null;
+// Validar tipo de reporte
 if (!$tipo_reporte) {
     echo json_encode(['status' => 'error', 'message' => 'Tipo de reporte no especificado.']);
     exit;
@@ -14,7 +16,7 @@ if (!$tipo_reporte) {
 
 try {
     $reporteModel = new Reporte();
-
+ // Si el tipo de reporte es válido, proceder a manejar la lógica
     switch ($tipo_reporte) {
         case '1': // Ventas
             $data = $reporteModel->getVentas();
@@ -54,7 +56,16 @@ try {
 
         default:
             throw new Exception('Tipo de reporte no válido.');
+    }// Guardar el reporte en la base de datos
+    if ($descripcion_reporte && $fecha_generacion) {
+        $reporteModel->guardarReporte($tipo_reporte, $descripcion_reporte, $fecha_generacion);
+        $response['message'] = 'Reporte generado y registrado correctamente.';
+    } else {
+        // Si faltan datos para el registro, solo se genera el reporte
+        $response['message'] = 'Reporte generado pero no se registró en la base de datos (datos incompletos).';
     }
+
+    
 } catch (Exception $e) {
     $response = ['status' => 'error', 'message' => $e->getMessage()];
 }
