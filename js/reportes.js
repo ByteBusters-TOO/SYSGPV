@@ -84,11 +84,12 @@ $(document).ready(function () {
                                 casa.precio_casa
                             ]);
                         } else if (tipo_reporte === "3") { // Reporte de Proyectos
-                            columnas = ["ID Proyecto", "Nombre", "Fecha Inicio", "Estado"];
+                            columnas = ["ID Proyecto", "Nombre", "Fecha Inicio", "Fecha Fin" , "Estado"];
                             filas = contenido.map(proyecto => [
                                 proyecto.id_proyecto,
                                 proyecto.nombre_proyecto,
                                 proyecto.fecha_inicio,
+                                proyecto.fecha_fin,
                                 proyecto.estado_proyecto
                             ]);
                         }
