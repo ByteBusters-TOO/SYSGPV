@@ -76,5 +76,29 @@ class Alerta {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAlertaPorId($id_alerta)
+    {
+        try {
+            $query = "SELECT c.id_alerta, c.estado_alerta, c.asunto_alerta, c.fecha_alerta, 
+                             c.tipo_alerta, c.id_proyecto, c.id_usuario, p.nombre_proyecto, u.nombre_usuario
+                      FROM " . $this->table_name . " c
+                      JOIN proyecto p ON c.id_proyecto = p.id_proyecto
+                      JOIN usuario u ON c.id_usuario = u.id_usuario
+                      WHERE c.id_alerta = :id_alerta";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':id_alerta', $id_alerta);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            error_log("Error en " . __METHOD__ . ": " . $e->getMessage());
+            return null;
+        }
+    }
 }
 ?>
