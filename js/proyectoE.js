@@ -71,8 +71,8 @@ $(document).ready(function() {
                         window.location.href = 'proyectoVer.php'; // Redirigir después de mostrar el mensaje
                     }, 3000); // Espera 3 segundos antes de redirigir
                     // Limpiar el formulario después de la edición
-                    $('#crearProyectoForm')[0].reset(); // Resetea el formulario
-                    $('#updateProyectoButton').text('Guardar Proyecto'); // Vuelve al texto original
+                    $('#crearEmpresaForm')[0].reset(); // Resetea el formulario
+                    $('#updateEmpresaButton').text('Guardar Proyecto'); // Vuelve al texto original
                     editProyectoId = null; // Resetea el ID de edición
 
                 } else {

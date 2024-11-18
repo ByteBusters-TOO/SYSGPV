@@ -2,8 +2,6 @@
   session_start();
   if (!isset($_SESSION['user']) || $_SESSION['tpu'] == 2)
       header("Location: ../pages/homeDueño.php");
-  elseif(!isset($_SESSION['user']) || $_SESSION['tpu'] == 2)
-       header("Location: ../partials/navbar-dueño.php");
   elseif (!isset($_SESSION['user']) || $_SESSION['tpu'] > 3) 
     header("Location: ./index.php");
 ?>
@@ -12,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Alarma</title>
+    <title>Alertas | SYSGPV</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
@@ -30,56 +28,56 @@
     <?php include '../partials/navbar.html'; ?>
 
     <div class="container mt-5">
-        <h2>Editar Alarma</h2>
+        <h2>Editar Alerta</h2>
 
         <div class="mensaje mb-3"></div>
 
-        <form id="editarProyectoForm">
+        <form id="createAlertaForm">
             <!-- Campo oculto para almacenar el ID del proyecto -->
             <input type="hidden">
-            <label for="tipoAlerta">Selecciona el tipo de alerta</label>
+            <label for="tipoAlerta">Selecciona el tipo de alerta:</label>
             <select  id="tipoAlerta" class="form-select" aria-label="Default select example">
                 <option selected>Tipo de alerta</option>
-                <option value="1">Alerta 1</option>
-                <option value="2">Alerta 2</option>
-                <option value="2">Alerta 3</option>
+                <option value="1">Proyecto atrasado</option>
+                <option value="2">Inactividad ventas de casa</option>
+                <option value="3">Otro</option>
             </select>
             <div class="mb-3">
-                <label for="fecha_inicio" class="form-label">Fecha de alerta</label>
+                <label for="fecha_alerta" class="form-label">Fecha de alerta:</label>
                 <input type="date" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="ubicacion_proyecto" class="form-label">Asunto</label>
+                <label for="asunto_alerta" class="form-label">Asunto:</label>
                 <textarea class="form-control" rows="4"></textarea>
             </div>
-          
-            <label for="estadoAlerta">Selecciona el estado de alerta</label>
+            <label for="estadoAlerta">Selecciona el estado de alerta: </label>
             <select  id="estadoAlerta" class="form-select" aria-label="Default select example">
                 <option selected>Estado de alerta</option>
-                <option value="1">Estado 1</option>
-                <option value="2">Estado 2</option>
-                <option value="2">Estado 3</option>
+                <option value="1">Alta</option>
+                <option value="2">Media</option>
+                <option value="3">Baja</option>
             </select>
-            
             <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Casa</label>
+                <label for="casa_alerta" class="form-label">Casa:</label>
                 <input type="text" class="form-control" >
             </div>
             <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Proyecto</label>
-                <input type="text" class="form-control" >
+                <label for="proyecto_alerta" class="form-label">Proyecto:</label>
+                <input type="text" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Usuario</label>
+                <label for="id_usuario" class="form-label">Usuario</label>
                 <input type="text" class="form-control" >
             </div>
-            <button type="button" class="btn btn-primary" id="updateProyectoButton">Actualizar Proyecto</button>
+            <button type="button" class="btn btn-info btn-sm" id="updateAlertaButton" style="min-width: 80px;">
+                <i class="bi bi-pencil"></i> Guardar Alerta
+            </button>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/proyectoE.js"></script>
+    <script src="../js/alertaEdit.js"></script>
 
     <footer class="footer py-4">
         <div class="container-fluid">
@@ -94,8 +92,8 @@
     </footer>
 
     <script>
-        // Pasar el ID del proyecto a proyecto.js para cargar los datos
-        var projectId = <?php echo json_encode($_GET['id'] ?? null); ?>;
+        // Pasar el ID de la alerta a alerta.js para cargar los datos
+        var alertaId = <?php echo json_encode($_GET['id'] ?? null); ?>;
     </script>
 </body>
 </html>

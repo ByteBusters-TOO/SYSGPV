@@ -57,6 +57,14 @@ class Venta {
     
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getTotalVentas() {
+        $query = "SELECT SUM(monto_venta) as total_ventas FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total_ventas']; // Devuelve la suma total de las ventas
+    }
     
 }
 
