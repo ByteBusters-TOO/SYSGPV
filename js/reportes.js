@@ -14,10 +14,10 @@ $(document).ready(function () {
 
     // Generar reporte
     $('#generarReporteButton').click(function () {
-        const tipoReporte = $('#tipoReporte').val();
-        console.log('Tipo de reporte seleccionado:', tipoReporte); // Verificar tipo de reporte
+        const tipo_reporte = $('#tipo_reporte').val();
+        console.log('Tipo de reporte seleccionado:', tipo_reporte); // Verificar tipo de reporte
 
-        if (tipoReporte === "Tipo de reporte") {
+        if (tipo_reporte === "Tipo de reporte") {
             showMessage('danger', 'Selecciona un tipo de reporte válido.');
             return;
         }
@@ -25,7 +25,7 @@ $(document).ready(function () {
         $.ajax({
             url: '../controllers/ReporteController.php',
             type: 'POST',
-            data: { tipoReporte },
+            data: { tipo_reporte },
             success: function (response) {
                 console.log('Respuesta completa:', response);  // Muestra toda la respuesta
                 console.log('Contenido:', response.data);     // Muestra solo el campo 'data'
@@ -54,7 +54,7 @@ $(document).ready(function () {
                         let filas = [];
 
                         // Asegurarse de que el tipo de reporte sea el correcto
-                        if (tipoReporte === "1") { // Reporte de Ventas
+                        if (tipo_reporte === "1") { // Reporte de Ventas
                             columnas = ["ID Venta", "Fecha Venta", "Monto Venta", "Cliente"];
                             filas = contenido.map(venta => [
                                 venta.id_venta,
@@ -62,7 +62,7 @@ $(document).ready(function () {
                                 venta.monto_venta,
                                 venta.nombre_cliente
                             ]);
-                        } else if (tipoReporte === "2") { // Reporte de Casas
+                        } else if (tipo_reporte === "2") { // Reporte de Casas
                             columnas = ["ID Casa", "Número Casa", "Estado", "Precio"];
                             filas = contenido.map(casa => [
                                 casa.id_casa,
@@ -70,7 +70,7 @@ $(document).ready(function () {
                                 casa.estado_casa,
                                 casa.precio_casa
                             ]);
-                        } else if (tipoReporte === "3") { // Reporte de Proyectos
+                        } else if (tipo_reporte === "3") { // Reporte de Proyectos
                             columnas = ["ID Proyecto", "Nombre", "Fecha Inicio", "Estado"];
                             filas = contenido.map(proyecto => [
                                 proyecto.id_proyecto,

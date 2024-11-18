@@ -31,35 +31,23 @@
         <div class="mensaje mb-3"></div>
 
         <form>
-        <label for="tipoReporte">Selecciona el tipo de reporte</label>
-            <select id="tipoReporte" class="form-select" aria-label="Default select example">
+        <label for="tipo_reporte">Selecciona el tipo de reporte</label>
+            <select id="tipo_reporte" class="form-select" aria-label="Default select example">
                 <option selected>Tipo de reporte</option>
                 <option value="1">Ventas</option>
                 <option value="2">Casas</option>
                 <option value="3">Proyectos</option>
             </select>
             <div class="mb-3">
-                <label for="descripcion_proyecto" class="form-label">Descripción de reporte</label>
+                <label for="descripcion_reporte" class="form-label">Descripción de reporte</label>
                 <textarea class="form-control" rows="4"
                     required></textarea>
             </div>
             <div class="mb-3">
-                <label for="fecha_fin" class="form-label">Fecha de Generacion</label>
+                <label for="fecha_generacion" class="form-label">Fecha de Generacion</label>
                 <input type="date" class="form-control">
             </div>
-            <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Usuario</label>
-                <input type="text" class="form-control" >
-            </div>
-            <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Proyecto</label>
-                <input type="text" class="form-control" >
-            </div>
-            <div class="mb-3">
-                <label for="nombre_proyecto" class="form-label">Casa</label>
-                <input type="text" class="form-control">
-            </div>
-
+            
             <button type="button" id="generarReporteButton" class="btn btn-primary">Generar reporte</button>
         </form>
     </div>

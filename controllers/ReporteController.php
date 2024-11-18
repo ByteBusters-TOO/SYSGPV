@@ -5,9 +5,9 @@ require_once '../models/mtoReporte.php';
 header('Content-Type: application/json');
 
 $response = ['status' => 'error', 'message' => ''];
-$tipoReporte = $_POST['tipoReporte'] ?? null;
+$tipo_reporte = $_POST['tipo_reporte'] ?? null;
 
-if (!$tipoReporte) {
+if (!$tipo_reporte) {
     echo json_encode(['status' => 'error', 'message' => 'Tipo de reporte no especificado.']);
     exit;
 }
@@ -15,7 +15,7 @@ if (!$tipoReporte) {
 try {
     $reporteModel = new Reporte();
 
-    switch ($tipoReporte) {
+    switch ($tipo_reporte) {
         case '1': // Ventas
             $data = $reporteModel->getVentas();
             $response = [
