@@ -57,7 +57,10 @@
                     <option value="Atrasado">Atrasado</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary" id="updateProyectoButton">Actualizar Proyecto</button>
+            <button type="button" class="btn btn-warning btn-sm" id="updateProyectoButton" style="min-width: 80px;">
+    <i class="bi bi-save"></i> Actualizar Proyecto
+</button>
+
         </form>
     </div>
 
