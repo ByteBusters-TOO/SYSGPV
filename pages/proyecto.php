@@ -1,3 +1,28 @@
+<?php
+session_start();
+
+// Verificar si la sesión está activa
+if (!isset($_SESSION['user'])) {
+    // Si no hay sesión activa, redirigir al login
+    header("Location: ./index.php");
+    exit;
+}
+
+// Redirigir según el rol del usuario
+if ($_SESSION['tpu'] == 1) {
+    // Si es Administrador, incluir el navbar de administrador
+    include "../partials/navbar.html";
+} elseif ($_SESSION['tpu'] == 2) {
+    // Si es Dueño, redirigir al home del Dueño
+    include "../partials/navbar-dueño.html";
+    //header("Location: ../pages/homeDueño.php");
+} else {
+    // Si el rol no es reconocido, redirigir al inicio de sesión
+    header("Location: ./index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,7 +45,6 @@
     </style>
 </head>
 <body>
-    <?php include '../partials/navbar.html'; ?>
 
     <div class="container mt-5">
         <h2>Crear Nuevo Proyecto</h2>

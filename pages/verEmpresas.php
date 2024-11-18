@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  if (!isset($_SESSION['user']) || $_SESSION['tpu'] > 3)
+  header("Location: ./index.php");    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

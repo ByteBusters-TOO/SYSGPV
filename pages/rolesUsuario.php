@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  if (!isset($_SESSION['user']) || $_SESSION['tpu'] == 2)
+      header("Location: ../pages/homeDueño.php");
+  elseif (!isset($_SESSION['user']) || $_SESSION['tpu'] > 3) 
+    header("Location: ./index.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -84,7 +91,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary" id="editActionTipoUsuarioButton">Actualizar</button>
+                                <button type="button" class="btn btn-primary" id="editActionTipoUsuarioButton">Actualizar</button>
                             </div>
                         </div>
                     </form>

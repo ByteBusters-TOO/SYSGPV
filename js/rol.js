@@ -161,7 +161,7 @@ $(document).ready(function() {
                 $('#editTipoUsuarioModal .descripcion-usuario-textarea').val(response.descripcion_usuario);
                 
                 // Cambiar texto del botón y mostrar el modal
-                $('#actionTipoUsuarioButton').text('Guardar');
+                //$('#actionTipoUsuarioButton').text('Guardar');
                 // Mostrar el modal de edición
                 $('#editTipoUsuarioModal').modal('show');
             },
@@ -173,12 +173,12 @@ $(document).ready(function() {
 
     $('#editActionTipoUsuarioButton').on('click', function () {
         // Se envían los datos del formulario de edición
-        var tipoUsuario = $('#edit_tipo_usuario').val();
-        var descripcionUsuario = $('#edit_descripcion_usuario').val();
+        var tipo_usuario = $('#edit_tipo_usuario').val();
+        var descripcion_usuario = $('#edit_descripcion_usuario').val();
 
         console.log({
-            tipo_usuario: tipoUsuario,
-            descripcion_usuario: descripcionUsuario
+            tipo_usuario: tipo_usuario,
+            descripcion_usuario: descripcion_usuario
         }); // Verificar qué datos se están enviando
     
         $.ajax({
@@ -186,8 +186,8 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 action: 'update',
-                tipo_usuario: tipoUsuario,
-                descripcion_usuario: descripcionUsuario
+                tipo_usuario: tipo_usuario,
+                descripcion_usuario: descripcion_usuario
             },
             success: function(response) {
                 console.log('Respuesta del servidor:', response);
