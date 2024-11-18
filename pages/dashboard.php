@@ -264,7 +264,7 @@ function generateChartProyectos(chartId, labels, data, totalProyectos) {
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels.concat("Mi Empresa"), // Añadimos "Mi Empresa" al final de las etiquetas
+            labels: labels.concat("Construyendo futuros"), // Añadimos "Mi Empresa" al final de las etiquetas
             datasets: [
                 {
                     label: 'Proyectos de Empresas',
