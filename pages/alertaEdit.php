@@ -4,6 +4,17 @@
       header("Location: ../pages/homeDueño.php");
   elseif (!isset($_SESSION['user']) || $_SESSION['tpu'] > 3) 
     header("Location: ./index.php");
+
+    // Crear instancia del modelo y obtener los datos de alertas
+    require_once '../models/mtoAlerta.php';
+    
+    if (isset($_GET['id'])) {
+        $id_alerta = $_GET['id'];
+    
+        // Crear instancia del modelo y obtener los datos de alertas
+        $alerta = new Alerta();
+        $datosAlerta = $alerta->getAlertaPorId($id_alerta);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,45 +43,51 @@
 
         <div class="mensaje mb-3"></div>
 
-        <form id="createAlertaForm">
-            <!-- Campo oculto para almacenar el ID del proyecto -->
-            <input type="hidden">
-            <label for="tipoAlerta">Selecciona el tipo de alerta:</label>
-            <select  id="tipoAlerta" class="form-select" aria-label="Default select example">
-                <option selected>Tipo de alerta</option>
-                <option value="1">Proyecto atrasado</option>
-                <option value="2">Inactividad ventas de casa</option>
-                <option value="3">Otro</option>
-            </select>
+        <form id="editAlertaForm">
+            <div class="mb-3">
+                <label for="tipo_alerta" class="form-label">Seleccionar tipo de alerta:</label>
+                <select id="tipo_alerta" name="tipo_alerta" class="form-control">
+                    <option value="1" <?php echo $datosAlerta['tipo_alerta'] == 1 ? 'selected' : ''; ?>>Proyecto atrasado</option>
+                    <option value="2" <?php echo $datosAlerta['tipo_alerta'] == 2 ? 'selected' : ''; ?>>Inactividad ventas de casa</option>
+                    <option value="3" <?php echo $datosAlerta['tipo_alerta'] == 3 ? 'selected' : ''; ?>>Otro</option>
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="fecha_alerta" class="form-label">Fecha de alerta:</label>
-                <input type="date" class="form-control">
+                    <input type="date" id="fecha_alerta" class="form-control" 
+                        value="<?php echo htmlspecialchars($datosAlerta['fecha_alerta']); ?>" required>
             </div>
             <div class="mb-3">
-                <label for="asunto_alerta" class="form-label">Asunto:</label>
-                <textarea class="form-control" rows="4"></textarea>
-            </div>
-            <label for="estadoAlerta">Selecciona el estado de alerta: </label>
-            <select  id="estadoAlerta" class="form-select" aria-label="Default select example">
-                <option selected>Estado de alerta</option>
-                <option value="1">Alta</option>
-                <option value="2">Media</option>
-                <option value="3">Baja</option>
-            </select>
+                 <label for="asunto_alerta" class="form-label">Asunto:</label>
+                <textarea id="asunto_alerta" class="form-control" rows="4" required><?php echo htmlspecialchars($datosAlerta['asunto_alerta']); ?></textarea>
+             </div>
             <div class="mb-3">
-                <label for="casa_alerta" class="form-label">Casa:</label>
-                <input type="text" class="form-control" >
+                <label for="estado_alerta" class="form-label">Selecciona el estado de alerta:</label>
+                <select id="estado_alerta" name="estado_alerta" class="form-control">
+                    <option value="1" <?php echo $datosAlerta['estado_alerta'] == 1 ? 'selected' : ''; ?>>Alta</option>
+                    <option value="2" <?php echo $datosAlerta['estado_alerta'] == 2 ? 'selected' : ''; ?>>Media</option>
+                    <option value="3" <?php echo $datosAlerta['estado_alerta'] == 3 ? 'selected' : ''; ?>>Baja</option>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="proyecto_alerta" class="form-label">Proyecto:</label>
-                <input type="text" class="form-control">
+                <label for="id_proyecto" class="form-label">Proyecto Asociado</label>
+                <select class="form-control" id="id_proyecto" name="id_proyecto" required>
+                    <option value="<?php echo $datosAlerta['id_proyecto']; ?>" selected>
+                        <?php echo $datosAlerta['nombre_proyecto']; ?>
+                    </option>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="id_usuario" class="form-label">Usuario</label>
-                <input type="text" class="form-control" >
+                <label for="id_usuario" class="form-label">Usuario asignado para alerta:</label>
+                <select class="form-control" id="id_usuario" name="id_usuario" required>
+                    <option value="<?php echo $datosAlerta['id_usuario']; ?>" selected>
+                        <?php echo $datosAlerta['nombre_usuario']; ?>
+                    </option>
+                </select>
             </div>
-            <button type="button" class="btn btn-info btn-sm" id="updateAlertaButton" style="min-width: 80px;">
-                <i class="bi bi-pencil"></i> Guardar Alerta
+
+            <button type="button" class="btn btn-info btn-sm mt-3" id="editAlertaButton" style="min-width: 80px;">
+            <i class="bi bi-save"></i> Actualizar Alerta
             </button>
         </form>
     </div>

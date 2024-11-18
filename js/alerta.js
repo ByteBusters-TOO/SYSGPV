@@ -15,21 +15,16 @@ $(document).ready(function() {
     }
 
     // Crear o modificar proyectos
-    $('#actionAlertaButton').click(function() {
+    $('#actionAlertaButton').on('click', function() {
         console.log("Botón Guardar Alerta presionado");
         var formData = new FormData();
         formData.append('estado_alerta', $('#estado_alerta').val());
         formData.append('asunto_alerta', $('#asunto_alerta').val());
         formData.append('fecha_alerta', $('#fecha_alerta').val());
         formData.append('tipo_alerta', $('#tipo_alerta').val());
-        formData.append('id_usuario', $('#id_usuario').val());
         formData.append('id_proyecto', $('#id_proyecto').val());
+        formData.append('id_usuario', $('#id_usuario').val()); //Se captura el ID usuario
 
-        // Verificación de campos requeridos
-        if (!$('#estado_alerta').val() || !$('#asunto_alerta').val() || !$('#fecha_alerta').val()  || !$('#tipo_alerta').val() || !$('#id_usuario') || !$('#id_proyecto')) {
-            showMessage('danger', "Complete los campos requeridos.");
-            return;
-        }
 
         if (editAlertaId !== null) {
             formData.append('_method', 'PUT');
@@ -46,9 +41,6 @@ $(document).ready(function() {
                 console.log("Respuesta del servidor:", response);
                 if (response.status === 'success') {
                     showMessage('success', response.message);
-                    setTimeout(function() {
-                        window.location.href = 'alertaNueva.php'; // Redirigir después de mostrar el mensaje
-                    }, 3000); // Espera 3 segundos antes de redirigir
                     $('#createAlertaForm')[0].reset();
                     $('#actionAlertaButton').text('Guardar Alerta');
                     editAlertaId = null;

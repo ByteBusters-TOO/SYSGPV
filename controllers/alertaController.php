@@ -44,15 +44,15 @@ try {
                 $asunto_alerta = $_POST['asunto_alerta'] ?? null;
                 $fecha_alerta = $_POST['fecha_alerta'] ?? null;
                 $tipo_alerta = $_POST['tipo_alerta'] ?? null;
-                $tipo_usuario = $_POST['tipo_usuario'] ?? null;
-                $id_proyecto = $_POST['id_proyecto'] ?? null;               
+                $id_proyecto = $_POST['id_proyecto'] ?? null; 
+                $id_usuario = $_POST['id_usuario'] ?? null;              
 
                 // Validación de campos obligatorios
-                if (!$estado_alerta || !$asunto_alerta || !$fecha_alerta || !$tipo_alerta || !$tipo_usuario || !$id_proyecto ) {
+                if (!$tipo_alerta || !$fecha_alerta || !$asunto_alerta || !$estado_alerta) {
                     throw new Exception('Datos incompletos al guardar.');
                 }
                 
-                if ($alertaModel->create($estado_alerta, $asunto_alerta, $fecha_alerta, $tipo_alerta, $tipo_usuario, $id_proyecto)) {
+                if ($alertaModel->create($estado_alerta, $asunto_alerta, $fecha_alerta, $tipo_alerta, $id_proyecto, $id_usuario )) {
                     $response = ['status' => 'success', 'message' => 'Alerta creada con éxito.'];
                 }  else {
                     throw new Exception('Error al crear la alerta.');
@@ -70,15 +70,15 @@ try {
                 $asunto_alerta = $_POST['asunto_alerta'] ?? null;
                 $fecha_alerta = $_POST['fecha_alerta'] ?? null;
                 $tipo_alerta = $_POST['tipo_alerta'] ?? null;
-                $tipo_usuario = $_POST['tipo_usuario'] ?? null;
                 $id_proyecto = $_POST['id_proyecto'] ?? null;
+                $id_usuario = $_POST['id_usuario'] ?? null;
 
                 // Validación de campos obligatorios
-                if (!$id_alerta || !$estado_alerta || !$asunto_alerta || !$fecha_alerta || !$tipo_alerta || !$tipo_usuario || !$id_proyecto ) {
-                    throw new Exception('Datos incompletos para actualizar');
+                if (!$tipo_alerta || !$fecha_alerta || !$asunto_alerta || !$estado_alerta) {
+                    throw new Exception('Datos incompletos al actualizar.');
                 }
 
-                if ($alertaModel->update($id_alerta, $estado_alerta, $asunto_alerta, $fecha_alerta, $tipo_alerta, $tipo_usuario, $id_proyecto)) {
+                if ($alertaModel->update($id_alerta, $tipo_alerta, $fecha_alerta, $asunto_alerta, $estado_alerta, $id_proyecto, $id_usuario)) {
                     $response = ['status' => 'success', 'message' => 'Alerta actualizada con éxito.'];
                 } else {
                     throw new Exception('Error al actualizar la alerta.');

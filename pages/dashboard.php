@@ -103,9 +103,9 @@ if ($_SESSION['tpu'] == 1) {
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card bg-danger text-white h-100">
-                        <div class="card-body py-5">Reportes</div>
+                        <div class="card-body py-5">Crear Reporte</div>
                         <div class="card-footer d-flex">
-                        <a class="nav-link" href="reportesH.php?action=ver">Ver detalles</a>
+                        <a class="nav-link" href="reportes.php?action=ver">Ver detalles</a>
                             <span class="ms-auto">
                                 <i class="bi bi-chevron-right"></i>
                             </span>

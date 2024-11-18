@@ -37,11 +37,11 @@ include '../partials/navbar.html';
                 <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" >
             </div>
             <div class="mb-3">
-                <label for="ventas_empresa" class="form-label">Proyectos</label>
+                <label for="ventas_empresa" class="form-label">Ventas</label>
                 <textarea class="form-control" id="ventas_empresa" name="ventas_empresa" ></textarea>
             </div>
             <div class="mb-3">
-                <label for="proyectos_empresa" class="form-label">Ventas</label>
+                <label for="proyectos_empresa" class="form-label">Proyectos</label>
                 <textarea class="form-control" id="proyectos_empresa" name="proyectos_empresa" ></textarea>
             </div>
             
