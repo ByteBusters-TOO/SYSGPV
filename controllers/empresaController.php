@@ -66,7 +66,7 @@ try {
                 $proyectos_empresa = filter_var($_POST['proyectos_empresa'], FILTER_SANITIZE_NUMBER_INT);
         
                 if ($id && $nombre_empresa && $ventas_empresa && $proyectos_empresa) {
-                    $result = $empresaModel->updateEmpresa($id, $nombre_empresa, $ventas_empresa, $proyectos_empresa);
+                    $result = $empresaModel->updateEmpresa($id, $nombre_empresa,$ventas_empresa, $proyectos_empresa);
                     if ($result) {
                         $response = ['status' => 'success', 'message' => 'Empresa actualizada con éxito.'];
                     } else {
